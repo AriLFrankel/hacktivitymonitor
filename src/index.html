@@ -3,12 +3,92 @@
 <head>
   <meta charset="utf-8">
   <title>HackerspaceDisplay</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <base href="/">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 </head>
-<body>
-  <HD-root>Loading...</HD-root>
-</body>
+  <body>
+    <HD-root>Loading...</HD-root>
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize-button" style="display: none;">Authorize</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
+    <script type="text/javascript">
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '1076443996115-ph9cia7grsd65fl1ppejk2a7idue8i1d.apps.googleusercontent.com';
+      var calendarId = "hackreactor.com_32333137383234383439@resource.calendar.google.com"
+      var calendarUrl = calendarId.split('@').join('%40')
+      var ROOMS = ["hackreactor.com_2d373931333934353637@resource.calendar.google.com", "hackreactor.com_32333137383234383439@resource.calendar.google.com", "hackreactor.com_3538363731393438383137@resource.calendar.google.com", "hackreactor.com_3136303231303936383132@resource.calendar.google.com", "hackreactor.com_3532303334313531373535@resource.calendar.google.com"]
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+      var SCOPES = ["https://www.googleapis.com/auth/calendar"];
+      var authorizeButton = document.getElementById('authorize-button');
+      var signoutButton = document.getElementById('signout-button');
+
+      /**
+       *  On load, called to load the auth2 library and API client library.
+       */
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.
+       */
+      function initClient() {
+        gapi.client.init({
+          discoveryDocs: DISCOVERY_DOCS,
+          clientId: CLIENT_ID,
+          scope: SCOPES.join(' ')
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          authorizeButton.onclick = handleAuthClick;
+          signoutButton.onclick = handleSignoutClick;
+        });
+      }
+
+      // /**
+      //  *  Called when the signed in status changes, to update the UI
+      //  *  appropriately. After a sign-in, the API is called.
+      //  */
+       function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'block';
+          console.log('is signed in')
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+          console.log("isn't signed in")
+        }
+      }
+
+      // /**
+      //  *  Sign in the user upon button click.
+      //  */
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      // /**
+      //  *  Sign out the user upon button click.
+      //  */
+       function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+    
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
 </html>
