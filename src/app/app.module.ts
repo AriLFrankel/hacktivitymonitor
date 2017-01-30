@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HttpComponent } from './http.component';
+import { AuthPageComponent } from './auth-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HttpComponent
+    HttpComponent,
+    AuthPageComponent
   ],
   imports: [
     BrowserModule,

@@ -8,8 +8,12 @@ declare var SCOPES:string[];
 
 @Component({
   selector: 'HD-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+   	<h1>App Loads</h1>
+	<hd-http></hd-http>
+    <hd-auth-page></hd-auth-page>
+  `,
+  styles: []
 })
 export class AppComponent implements OnInit{
   title = 'HD works!';
