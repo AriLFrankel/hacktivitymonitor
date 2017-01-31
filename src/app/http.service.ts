@@ -1,7 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/Rx';
-import { Observable } from 'rxjs/Rx';
 
 declare var gapi:any;
 declare var moment:any;
@@ -10,7 +8,7 @@ declare var moment:any;
 export class HttpService {
   
   @Output() 
-  statusEvent = new EventEmitter<string>();
+  statusEvent:EventEmitter<any> = new EventEmitter();
   
   getRooms(rooms:string[]) {
     return Promise.all(rooms.map((room) => {
@@ -28,11 +26,16 @@ export class HttpService {
   }
 
   getEvents(room:string){
-    let today = new Date(new Date().toString().split(' ').slice(0,4).concat(['00:01:00']).join(' ')).toISOString()
+    let todayMin = new Date(new Date().toString().split(' ').slice(0,4).concat(['00:01:00']).join(' ')).toISOString()
+    let todayMax = new Date(new Date().toString().split(' ').slice(0,4).concat(['23:59:59']).join(' ')).toISOString()
+
     return gapi.client.calendar.events.list({
       'calendarId': room,
-      'timeMin': today,
-      'minAccessRole': 'freeBusyReader'
+      'timeMin': todayMin,
+      'timeMax': todayMax,
+      'minAccessRole': 'freeBusyReader',
+      'orderBy': 'startTime',
+      'singleEvents': true
     })
     .then(eventData => {
       console.log(eventData, eventData.result.items)
@@ -48,8 +51,7 @@ export class HttpService {
    getStatus(roomId){
     let currentTime = moment().add(-6, 'h').toISOString(),
     start:string, end:string;
-
-    return gapi.client.calendar.freebusy.query({
+    gapi.client.calendar.freebusy.query({
       "timeMin": (new Date()).toISOString(),
       "timeMax": this.addHours.call(new Date(),8).toISOString(),
       "timeZone": "America/Chicago",
@@ -63,9 +65,13 @@ export class HttpService {
       response.result.calendars[roomId].busy.forEach((busyObj) => {
         start = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString()
         end = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString()
-        if(start <= currentTime && end <= currentTime) this.statusEvent.emit('busy');
+        if(start <= currentTime && end <= currentTime){
+          console.log("busy, let's fire an event");
+         this.statusEvent.emit({[roomId]: 'red'});
+         }
       })
-    this.statusEvent.emit('free');
+      console.log('we are here without any busy events', this.statusEvent)
+      this.statusEvent.emit({[roomId]: 'green'});
     })
   }
 

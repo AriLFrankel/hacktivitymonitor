@@ -7,11 +7,18 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+  <style>
+    button, .room {
+      cursor: pointer;
+    }
+  </style>
 </head>
   <body>
     <HD-root>Loading...</HD-root>
     <script type="text/javascript">
+    /*initialize gapi*/
       var CLIENT_ID = '1076443996115-ph9cia7grsd65fl1ppejk2a7idue8i1d.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
       var SCOPES = ["https://www.googleapis.com/auth/calendar"];
@@ -29,7 +36,6 @@
           console.log('gapi initialized')
         });
       }
-
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="handleClientLoad()"
