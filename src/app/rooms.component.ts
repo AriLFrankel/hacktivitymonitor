@@ -6,7 +6,7 @@ import { HttpService } from './http.service';
   template: 
   `
     <div>Rooms here:
-      <div *ngFor='let room of rooms' (click)='getEvents($event)' id={{room.id}} class="room" [style.background]='room.busy'>{{room.summary}}</div>
+      <div *ngFor='let room of rooms' (click)='getEvents($event)' id={{room.id}} class="room" [style.background]='room.busy'><a [routerLink]='[room.id]'>{{room.summary}}</a></div>
     </div>
     <button (click)="getRooms()">get Rooms</button>
     <div>Events here:
