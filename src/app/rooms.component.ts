@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from './http.service';
 
 @Component({
@@ -6,9 +6,9 @@ import { HttpService } from './http.service';
   template: 
   `
     <div>Rooms here:
-      <div *ngFor='let room of rooms' (click)='getEvents($event)' id={{room.id}} class="room">{{room.summary}}</div>
+      <div *ngFor='let room of rooms' (click)='getEvents($event)' id={{room.id}} class="room" [style.background]='room.busy'>{{room.summary}}</div>
     </div>
-    <button (click)="getRooms()" (statusEvent)="updateStatus($event)">get Rooms</button>
+    <button (click)="getRooms()">get Rooms</button>
     <div>Events here:
       <div *ngFor='let event of events'>{{event.summary}}</div>
     </div>
@@ -18,8 +18,20 @@ import { HttpService } from './http.service';
 export class RoomsComponent {
   rooms: any[] = [];
   events: any[] = [];
-  
-  constructor(private httpService:HttpService) { }
+  subscription: any;
+  constructor(private httpService:HttpService) { 
+    this.subscription = this.httpService.statusEvent
+    .subscribe(roomBusy => {
+      for(let roomBusyKey in roomBusy){
+        console.log(roomBusyKey)
+        for(let roomKey in this.rooms){
+          console.log(this.rooms[roomKey].id)
+          if(this.rooms[roomKey].id === roomBusyKey) this.rooms[roomKey].busy = roomBusy[roomBusyKey];
+        }
+      }
+      console.log(this.rooms)
+    })
+  }
 
   getRooms(){
     this.httpService.getRooms(["hackreactor.com_2d373931333934353637@resource.calendar.google.com", "hackreactor.com_32333137383234383439@resource.calendar.google.com", "hackreactor.com_3538363731393438383137@resource.calendar.google.com", "hackreactor.com_3136303231303936383132@resource.calendar.google.com", "hackreactor.com_3532303334313531373535@resource.calendar.google.com"])
@@ -30,11 +42,11 @@ export class RoomsComponent {
         let room = roomsObj[roomKey];
         this.rooms.push(room);
       }
-      Promise.all(this.rooms.map( (room:any) => {
+      this.rooms.map( (room:any) => {
         console.log(room);
         return this.httpService.getStatus(room.id)
-      })).then(roomsData => console.log(roomsData));
-    })  
+      })
+    });  
   }
 
   getEvents(room:any){
@@ -47,7 +59,7 @@ export class RoomsComponent {
     })
   }
 
-  updateStatus(event:any){
-    console.log('updateStatus event', event);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
