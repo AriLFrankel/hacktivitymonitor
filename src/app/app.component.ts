@@ -9,9 +9,12 @@ declare var SCOPES:string[];
 @Component({
   selector: 'HD-root',
   template: `
-   	<h1>App Loads</h1>
-	<hd-http></hd-http>
     <hd-auth-page></hd-auth-page>
+    <div class="row">
+      <hd-junior-schedule class="col-md-4"></hd-junior-schedule> 
+      <hd-rooms class="col-md-4"></hd-rooms>
+      <hd-senior-schedule class="col-md-4"></hd-senior-schedule>
+    </div>
   `,
   styles: []
 })
