@@ -50,6 +50,7 @@ export class HttpService {
 
    getStatus(roomId){
     let currentTime = moment().add(-6, 'h').toISOString(),
+    thirtyFromNow = moment().add(-5.5, 'h').toISOString(),
     start:string, end:string;
     gapi.client.calendar.freebusy.query({
       "timeMin": (new Date()).toISOString(),
@@ -69,6 +70,10 @@ export class HttpService {
           console.log("busy, let's fire an event");
          this.statusEvent.emit({[roomId]: 'red'});
          }
+        if(start <= thirtyFromNow && end <=currentTime){
+          console.log("busy soon, let's fire an event");
+          this.statusEvent.emit({[roomId]: 'yellow'});
+        }
       })
       console.log('we are here without any busy events', this.statusEvent)
       this.statusEvent.emit({[roomId]: 'green'});
