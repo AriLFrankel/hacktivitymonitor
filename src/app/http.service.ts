@@ -68,8 +68,8 @@ export class HttpService {
         end = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString()
         if(start <= currentTime && end <= currentTime){
           console.log("busy, let's fire an event");
-         this.statusEvent.emit({[roomId]: 'red'});
-         }
+          this.statusEvent.emit({[roomId]: 'red'});
+        }
         if(start <= thirtyFromNow && end <=currentTime){
           console.log("busy soon, let's fire an event");
           this.statusEvent.emit({[roomId]: 'yellow'});

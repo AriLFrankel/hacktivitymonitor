@@ -4,10 +4,11 @@ import { HttpService } from './http.service';
 @Component({
   selector: 'hd-junior-schedule',
   template: `
+      <a [routerLink]="['/Junior']">Junior View</a>
     <div>
       junior-schedule here:
-      <div *ngFor='let event of events'>{{event.summary}}</div>
     </div>
+      <div *ngFor='let event of events'>{{event.summary}}</div>
     <button (click)="getSchedule()">get junior schedule</button>
   `,
   providers: [HttpService]

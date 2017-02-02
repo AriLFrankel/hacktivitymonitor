@@ -6,6 +6,7 @@ import { HttpService } from './http.service';
   selector: 'hd-senior-schedule',
   template: `
   <div>
+    <a [routerLink]="['/Senior']">Senior View</a>
     <div>Senior Schedule</div>
     <div *ngFor='let event of events'>{{event.summary}}</div>
   </div>
@@ -19,7 +20,7 @@ export class SeniorScheduleComponent {
   constructor(private httpService:HttpService) { }
 
   getSchedule() {
-    this.httpService.getEvents('hackreactor.com_ljtk4epeeca4bm4b73m09cb4c4@group.calendar.google.com')
+    this.httpService.getEvents('hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com')
     .then( (events) => {
       this.events = [].concat(events)
     })
