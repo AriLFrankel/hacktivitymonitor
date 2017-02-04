@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from './auth-service.service';
 
 @Component({
@@ -14,21 +14,21 @@ import { AuthService } from './auth-service.service';
   styles: [],
   providers: [AuthService]
 })
-export class AuthPageComponent {
+export class AuthPageComponent implements OnDestroy {
 
-  constructor(private authService:AuthService){ 
+  constructor(private authService: AuthService) {
     this.signIn();
   }
 
-  signIn(){
-  	this.authService.signIn();
+  signIn() {
+    this.authService.signIn();
   }
 
-  signOut(){
-  	this.authService.signOut();
+  signOut() {
+    this.authService.signOut();
   }
 
-  ngOnDestroy(){
-    this.signOut()
+  ngOnDestroy() {
+    this.signOut();
   }
 }

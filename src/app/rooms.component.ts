@@ -1,65 +1,70 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { HttpService } from './http.service';
 
 @Component({
   selector: 'hd-rooms',
-  template: 
+  template:
   `
-    <div>Rooms here:
-      <div *ngFor='let room of rooms' (click)='getEvents($event)' id={{room.id}} class="room" [style.background]='room.busy'><a [routerLink]='[room.summary.slice(6)]'>{{room.summary.slice(6)}}</a></div>
-    </div>
-    <button (click)="getRooms()">get Rooms</button>
-    <div>Events here:
-      <div *ngFor='let event of events'>{{event.summary}}</div>
+    <div *ngFor='let room of rooms'
+    id={{room.id}} class="room"
+    [style.background]='room.busy'>
+    <a [routerLink]='[room.summary.slice(6)]'>{{room.summary.slice(6)}}</a>
     </div>
   `,
   providers: [HttpService]
 })
-export class RoomsComponent {
+export class RoomsComponent implements OnDestroy {
   rooms: any[] = [];
   events: any[] = [];
   subscription: any;
-  constructor(private httpService:HttpService) { 
+  constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
+    ref.detach();
     this.subscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
-      for(let roomBusyKey in roomBusy){
-        console.log(roomBusyKey)
-        for(let roomKey in this.rooms){
-          console.log(this.rooms[roomKey].id)
-          if(this.rooms[roomKey].id === roomBusyKey) this.rooms[roomKey].busy = roomBusy[roomBusyKey];
+      for (const roomBusyKey in roomBusy) {
+        if (roomBusy.hasOwnProperty(roomBusyKey)) {
+          for (const roomKey in this.rooms) {
+            if (this.rooms.hasOwnProperty(roomKey) && this.rooms[roomKey].id === roomBusyKey) {
+              this.rooms[roomKey].busy = roomBusy[roomBusyKey];
+            }
+          }
         }
       }
-      console.log(this.rooms)
-    })
+      this.ref.detectChanges();
+    });
+    const getRooms = this.getRooms.bind( this);
+    const getStatuses = this.getStatuses.bind( this);
+    setTimeout(getRooms, 1000);
+    setTimeout(getStatuses, 1500);
   }
 
-  getRooms(){
-    this.httpService.getRooms(["hackreactor.com_2d373931333934353637@resource.calendar.google.com", "hackreactor.com_32333137383234383439@resource.calendar.google.com", "hackreactor.com_3538363731393438383137@resource.calendar.google.com", "hackreactor.com_3136303231303936383132@resource.calendar.google.com", "hackreactor.com_3532303334313531373535@resource.calendar.google.com"])
+  getRooms() {
+    this.httpService.getRooms(
+      ['hackreactor.com_2d373931333934353637@resource.calendar.google.com',
+      'hackreactor.com_32333137383234383439@resource.calendar.google.com',
+      'hackreactor.com_3538363731393438383137@resource.calendar.google.com',
+      'hackreactor.com_3136303231303936383132@resource.calendar.google.com',
+      'hackreactor.com_3532303334313531373535@resource.calendar.google.com'
+      ])
     .then( (roomsObj) => {
       this.rooms = [];
       this.events = [];
-      for(let roomKey in roomsObj){
-        let room = roomsObj[roomKey];
-        this.rooms.push(room);
-      }
-      this.rooms.map( (room:any) => {
-        console.log(room);
-        return this.httpService.getStatus(room.id)
-      })
-    });  
-  }
+      for (const roomKey in roomsObj) {
+        if (roomsObj.hasOwnProperty(roomKey)) {
+          const room = roomsObj[roomKey];
+          this.rooms.push(room);
+        }
+      };
+    });
+  };
 
-  getEvents(room:any){
-    // get events for a room
-    // room is either a roomId or a dom element with id attribute of roomId
-  	return this.httpService.getEvents(room.target.id || room)
-    .then ( (events) => {
-      if(events.length) this.events = [].concat(events);
-      else this.events = [{summary: 'no events in calendar'}]
-    })
-  }
+  getStatuses() {
+    this.rooms.map( (room: any) => {
+      return this.httpService.getStatus(room.id);
+    });
+  };
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-}
+  };
+};
