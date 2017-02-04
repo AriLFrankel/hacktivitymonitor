@@ -14,7 +14,7 @@ export class JuniorScheduleComponent {
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
     ref.detach();
     const getSchedule = this.getSchedule.bind(this);
-    setTimeout(getSchedule, 1000);
+    setTimeout(getSchedule, 1500);
   };
 
   getSchedule() {
