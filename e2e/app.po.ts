@@ -6,6 +6,6 @@ export class HackerspaceDisplayPage {
   }
 
   getParagraphText() {
-    return element(by.css('HD-root h1')).getText();
+    return element(by.css('hd-root h1')).getText();
   }
 }

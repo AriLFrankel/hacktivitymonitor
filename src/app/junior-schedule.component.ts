@@ -1,28 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { HttpService } from './http.service';
 
 @Component({
   selector: 'hd-junior-schedule',
   template: `
-      <a [routerLink]="['/Junior']">Junior View</a>
-    <div>
-      junior-schedule here:
-    </div>
-      <div *ngFor='let event of events'>{{event.summary}}</div>
-    <button (click)="getSchedule()">get junior schedule</button>
+  <div *ngFor='let event of events'>{{event.summary}}</div>
   `,
   providers: [HttpService]
 })
-export class JuniorScheduleComponent {
-  events:any[] = []
 
-  constructor(private httpService:HttpService) { }
+export class JuniorScheduleComponent {
+  events: any[];
+  constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
+    ref.detach();
+    const getSchedule = this.getSchedule.bind(this);
+    setTimeout(getSchedule, 1000);
+  };
 
   getSchedule() {
     this.httpService.getEvents('hackreactor.com_ljtk4epeeca4bm4b73m09cb4c4@group.calendar.google.com')
     .then( (events) => {
-      this.events = [].concat(events)
-    })
-  }
+      this.events = [].concat(events);
+      this.ref.detectChanges();
+    });
+  };
 
 }

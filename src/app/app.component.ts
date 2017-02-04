@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RoomsComponent } from './rooms.component';
 
 @Component({
-  selector: 'HD-root',
+  selector: 'hd-root',
   template: `
     <router-outlet></router-outlet>
   `
 })
 
 export class AppComponent {
-	
 }

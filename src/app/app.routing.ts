@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule } from '@angular/router';
 import { HackerspaceComponent } from './hackerspace-component.component';
 import { RoomScheduleComponent } from './room-schedule.component';
 

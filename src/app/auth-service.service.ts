@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-declare var gapi:any;
+declare var gapi: any;
 
 
 @Injectable()
 export class AuthService {
 
-  constructor() { 
+  constructor() {
     gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
   }
 
-  signIn(){
+  signIn() {
     gapi.auth2.getAuthInstance().signIn();
   }
 
@@ -18,8 +18,8 @@ export class AuthService {
     gapi.auth2.getAuthInstance().signOut();
   }
 
-  updateSigninStatus(status:boolean){
-  	console.log('status', status);
+  updateSigninStatus(status: boolean) {
+    // console.log('status', status);
   }
 
 }
