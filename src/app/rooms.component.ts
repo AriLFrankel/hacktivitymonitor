@@ -50,6 +50,7 @@ export class RoomsComponent implements OnDestroy {
       'hackreactor.com_3532303334313531373535@resource.calendar.google.com',
       'hackreactor.com_2d3433363932323136393534@resource.calendar.google.com',
       'hackreactor.com_2d3231313833303133383036@resource.calendar.google.com',
+      'hackreactor.com_3836363230383730323630@resource.calendar.google.com'
       ])
     .then( (roomsObj) => {
       this.rooms = [];
