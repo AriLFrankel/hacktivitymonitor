@@ -6,8 +6,9 @@ import { HttpService } from './http.service';
   template:
   `
     <div *ngFor='let room of rooms'
-    id={{room.id}} class="room"
-    [style.background]='room.busy'>
+    id={{room.id}} [ngClass]="room"
+    [(style.background)]='room.busy'
+    >
     <a [routerLink]='[room.summary.slice(6)]'>{{room.summary.slice(6)}}</a>
     </div>
   `,
@@ -26,25 +27,29 @@ export class RoomsComponent implements OnDestroy {
           for (const roomKey in this.rooms) {
             if (this.rooms.hasOwnProperty(roomKey) && this.rooms[roomKey].id === roomBusyKey) {
               this.rooms[roomKey].busy = roomBusy[roomBusyKey];
+              console.log('in the inner most if', this.rooms[roomKey])
+              this.ref.detectChanges();
             }
           }
         }
       }
-      this.ref.detectChanges();
     });
     const getRooms = this.getRooms.bind( this);
     const getStatuses = this.getStatuses.bind( this);
     setTimeout(getRooms, 1000);
-    setTimeout(getStatuses, 1500);
+    setInterval(getStatuses, 2000);
   }
 
   getRooms() {
     this.httpService.getRooms(
-      ['hackreactor.com_2d373931333934353637@resource.calendar.google.com',
+      [
+      'hackreactor.com_2d373931333934353637@resource.calendar.google.com',
       'hackreactor.com_32333137383234383439@resource.calendar.google.com',
       'hackreactor.com_3538363731393438383137@resource.calendar.google.com',
       'hackreactor.com_3136303231303936383132@resource.calendar.google.com',
-      'hackreactor.com_3532303334313531373535@resource.calendar.google.com'
+      'hackreactor.com_3532303334313531373535@resource.calendar.google.com',
+      'hackreactor.com_2d3433363932323136393534@resource.calendar.google.com',
+      'hackreactor.com_2d3231313833303133383036@resource.calendar.google.com',
       ])
     .then( (roomsObj) => {
       this.rooms = [];
@@ -59,8 +64,9 @@ export class RoomsComponent implements OnDestroy {
   };
 
   getStatuses() {
-    this.rooms.map( (room: any) => {
-      return this.httpService.getStatus(room.id);
+    this.rooms.forEach( (room: any) => {
+      room.busy = 'green';
+      this.httpService.getStatus(room.id);
     });
   };
 
