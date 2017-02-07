@@ -2,6 +2,7 @@ import { Component, DoCheck, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { HttpService } from './http.service';
+import { AuthService } from './auth-service.service';
 import { roomDictionary} from './room-dictionary';
 
 @Component({
@@ -10,7 +11,7 @@ import { roomDictionary} from './room-dictionary';
     <div>{{roomId}}</div>
     <div *ngFor='let event of events'>{{event.summary}}</div>
   `,
-  providers: [HttpService]
+  providers: [HttpService, AuthService]
 })
 export class RoomScheduleComponent implements DoCheck, OnDestroy {
   private subscription: Subscription;
@@ -21,8 +22,11 @@ export class RoomScheduleComponent implements DoCheck, OnDestroy {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private httpService: HttpService
-             ) { };
+              private httpService: HttpService,
+              private authService: AuthService
+             ) { 
+    this.authService.signIn();
+  };
 
   ngDoCheck() {
     this.subscription = this.route.params.subscribe(
@@ -36,7 +40,7 @@ export class RoomScheduleComponent implements DoCheck, OnDestroy {
       } else {
         this.events = [{summary: 'no events in calendar'}];
       }
-    });
+    })
   };
 
   ngOnDestroy() {

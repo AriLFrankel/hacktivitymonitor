@@ -48,7 +48,6 @@ export class HttpService {
    getStatus(roomId) {
     const currentTime = moment().add(-6, 'h').toISOString(),
     thirtyFromNow = moment().add(-5.5, 'h').toISOString();
-    let start: string, end: string;
     gapi.client.calendar.freebusy.query({
       'timeMin': (new Date()).toISOString(),
       'timeMax': this.addHours.call(new Date(), 8).toISOString(),
@@ -60,16 +59,15 @@ export class HttpService {
       ]
     }).execute( (response) => {
       response.result.calendars[roomId].busy.forEach((busyObj) => {
-        start = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString();
-        end = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString();
-        if (start <= currentTime && end <= currentTime) {
-          this.statusEvent.emit({[roomId]: 'red'});
-        }
-        if (start <= thirtyFromNow && end <= currentTime) {
+        const start = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString();
+        const end = moment(busyObj.end).add(-6, 'h').add(-1, 'm').toISOString();
+        let counter = 0;
+        if (start <= thirtyFromNow && start >= currentTime) {
           this.statusEvent.emit({[roomId]: 'yellow'});
-        }
-      });
-      this.statusEvent.emit({[roomId]: 'green'});
+        } else if (start <= currentTime && end >= currentTime) {
+          this.statusEvent.emit({[roomId]: 'red'});
+        } 
+      });      
     });
   };
 };
