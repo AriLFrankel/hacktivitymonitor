@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,MAAO,CACL,KAAK,CAAE,GAAG,CCDZ,MAAO,CACL,KAAK,CAAE,IAAI,CAEb,IAAK,CACH,KAAK,CAAE,KAAK",
+"sources": ["../scss/components/_events.scss","../scss/components/_clock.scss"],
+"names": [],
+"file": "main.css"
+}

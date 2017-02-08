@@ -4,7 +4,7 @@ import { HttpService } from './http.service';
 @Component({
   selector: 'hd-junior-schedule',
   template: `
-  <div *ngFor='let event of events'>{{event.summary}}</div>
+  <div *ngFor='let event of events' class="event">{{event.summary}} </div>
   `,
   providers: [HttpService]
 })
@@ -14,7 +14,7 @@ export class JuniorScheduleComponent {
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
     ref.detach();
     const getSchedule = this.getSchedule.bind(this);
-    setTimeout(getSchedule, 1500);
+    setTimeout(getSchedule, 1200);
   };
 
   getSchedule() {
