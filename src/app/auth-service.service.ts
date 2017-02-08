@@ -12,6 +12,4 @@ export class AuthService {
   signOut() {
     gapi.auth2.getAuthInstance().signOut
   }
-
-
 }

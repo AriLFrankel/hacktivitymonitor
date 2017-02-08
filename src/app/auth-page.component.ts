@@ -1,8 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from './auth-service.service';
 
+<<<<<<< HEAD
 declare var gapi: any;
 
+=======
+>>>>>>> 7c9e75e8233fa6b68b7dcba80141375544e63c96
 @Component({
   selector: 'hd-auth-page',
   template: `
