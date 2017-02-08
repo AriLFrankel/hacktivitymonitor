@@ -4,11 +4,7 @@ import { HttpService } from './http.service';
 @Component({
   selector: 'hd-junior-schedule',
   template: `
-<<<<<<< HEAD
   <div *ngFor='let event of events' class="event">{{event.summary}} </div>
-=======
-  <div *ngFor='let event of events'>{{event.summary}}</div>
->>>>>>> 7c9e75e8233fa6b68b7dcba80141375544e63c96
   `,
   providers: [HttpService]
 })
