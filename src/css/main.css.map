@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,MAAO,CACL,KAAK,CAAE,GAAG,CCDZ,MAAO,CACL,KAAK,CAAE,IAAI,CAEb,IAAK,CACH,KAAK,CAAE,KAAK",
+"mappings": "AAAA,MAAO,CACL,KAAK,CAAE,GAAG,CACV,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,IAAI,CAChB,YAAY,CAAE,mBAAmB,CACjC,YAAY,CAAE,KAAK,CACnB,YAAY,CAAE,KAAK,CCNrB,MAAO,CACL,KAAK,CAAE,IAAI,CAEb,IAAK,CACH,KAAK,CAAE,KAAK",
 "sources": ["../scss/components/_events.scss","../scss/components/_clock.scss"],
 "names": [],
 "file": "main.css"
