@@ -66,7 +66,13 @@ export class HttpService {
           this.statusEvent.emit({[roomId]: 'yellow'});
         } else if (start <= currentTime && end >= currentTime) {
           this.statusEvent.emit({[roomId]: 'red'});
+<<<<<<< HEAD
         } 
+=======
+        } else {
+          this.statusEvent.emit({[roomId]: 'green'});
+        }
+>>>>>>> pull
       });      
     });
   };
