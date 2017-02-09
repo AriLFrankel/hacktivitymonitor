@@ -66,10 +66,6 @@ export class RoomsComponent implements OnDestroy {
 
   getStatuses() {
     this.rooms.forEach( (room: any) => {
-<<<<<<< HEAD
-      room.busy = 'green';
-=======
->>>>>>> pull
       this.httpService.getStatus(room.id);
     });
   };
