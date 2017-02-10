@@ -19,4 +19,4 @@ export const roomDictionary = {
   'Hamilton': 'hackreactor.com_3836363230383730323630@resource.calendar.google.com',
   'Junior Open Classroom' : 'hackreactor.com_2d3433363932323136393534@resource.calendar.google.com',
   'Senior Open Classroom' : 'hackreactor.com_2d3231313833303133383036@resource.calendar.google.com'
-};
+}

@@ -1,19 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http'
 
-import { AppComponent } from './app.component';
-import { RoomsComponent } from './rooms.component';
-import { AuthPageComponent } from './auth-page.component';
-import { RoomScheduleComponent } from './room-schedule.component';
-import { JuniorScheduleComponent } from './junior-schedule.component';
-import { SeniorScheduleComponent } from './senior-schedule.component';
-import { HackerspaceComponent } from './hackerspace-component.component';
+import { AppComponent } from './app.component'
+import { RoomsComponent } from './rooms.component'
+import { AuthPageComponent } from './auth-page.component'
+import { RoomScheduleComponent } from './room-schedule.component'
+import { JuniorScheduleComponent } from './junior-schedule.component'
+import { SeniorScheduleComponent } from './senior-schedule.component'
+import { HackerspaceComponent } from './hackerspace-component.component'
 
-import { routing } from './app.routing';
-import { ApiGuard } from './api.guard';
-import { HttpService } from './http.service';
+import { routing } from './app.routing'
+import { ApiGuard } from './api.guard'
+import { HttpService } from './http.service'
+import { WeatherComponent } from './weather.component'
+import { ClockComponent } from './clock.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { HttpService } from './http.service';
     RoomScheduleComponent,
     JuniorScheduleComponent,
     SeniorScheduleComponent,
-    HackerspaceComponent
+    HackerspaceComponent,
+    WeatherComponent,
+    ClockComponent
   ],
   imports: [
     BrowserModule,

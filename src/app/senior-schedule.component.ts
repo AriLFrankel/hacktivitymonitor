@@ -1,5 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { HttpService } from './http.service';
+import { Component, ChangeDetectorRef } from '@angular/core'
+import { HttpService } from './http.service'
 
 
 @Component({
@@ -10,20 +10,20 @@ import { HttpService } from './http.service';
   providers: [HttpService]
 })
 export class SeniorScheduleComponent {
-  events: any[] = [];
+  events: any[] = []
 
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
-    ref.detach();
-    const getSchedule = this.getSchedule.bind(this);
-    setTimeout(getSchedule, 1200);
-  };
+    ref.detach()
+    const getSchedule = this.getSchedule.bind(this)
+    setTimeout(getSchedule, 1200)
+  }
 
   getSchedule() {
     this.httpService.getEvents('hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com')
     .then( (events) => {
-      this.events = [].concat(events);
-      this.ref.detectChanges();
-    });
-  };
+      this.events = [].concat(events)
+      this.ref.detectChanges()
+    })
+  }
 
-};
+}

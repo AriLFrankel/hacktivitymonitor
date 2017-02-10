@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RoomsComponent } from './rooms.component';
+import { Component } from '@angular/core'
+import { RoomsComponent } from './rooms.component'
 
 @Component({
   selector: 'hd-root',

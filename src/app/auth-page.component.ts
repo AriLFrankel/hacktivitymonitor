@@ -1,7 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
-import { AuthService } from './auth-service.service';
+import { Component, OnDestroy } from '@angular/core'
+import { AuthService } from './auth-service.service'
 
-declare var gapi: any;
+declare var gapi: any
 
 @Component({
   selector: 'hd-auth-page',
@@ -19,19 +19,18 @@ declare var gapi: any;
 export class AuthPageComponent implements OnDestroy {
 
   constructor(private authService: AuthService) {
-    console.log('gapi in constructor: ', gapi)
-    setTimeout(this.signIn.bind(this), 1200);
+    setTimeout(this.signIn.bind(this), 1200)
   }
 
   signIn() {
-    this.authService.signIn();
+    this.authService.signIn()
   }
 
   signOut() {
-    this.authService.signOut();
+    this.authService.signOut()
   }
 
   ngOnDestroy() {
-    this.signOut();
+    this.signOut()
   }
 }

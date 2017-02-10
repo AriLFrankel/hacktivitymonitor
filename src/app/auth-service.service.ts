@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
-declare var gapi: any;
+declare var gapi: any
 
 @Injectable()
 export class AuthService {
