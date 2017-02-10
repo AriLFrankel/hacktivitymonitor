@@ -27,7 +27,6 @@ export class RoomsComponent implements OnDestroy {
           for (const roomKey in this.rooms) {
             if (this.rooms.hasOwnProperty(roomKey) && this.rooms[roomKey].id === roomBusyKey) {
               this.rooms[roomKey].busy = roomBusy[roomBusyKey];
-              console.log('in the inner most if', this.rooms[roomKey])
               this.ref.detectChanges();
             }
           }

@@ -10,7 +10,10 @@ import { RoomScheduleComponent } from './room-schedule.component';
 import { JuniorScheduleComponent } from './junior-schedule.component';
 import { SeniorScheduleComponent } from './senior-schedule.component';
 import { HackerspaceComponent } from './hackerspace-component.component';
+
 import { routing } from './app.routing';
+import { ApiGuard } from './api.guard';
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,7 @@ import { routing } from './app.routing';
     HttpModule,
     routing
   ],
-  providers: [HttpModule],
+  providers: [HttpService, ApiGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

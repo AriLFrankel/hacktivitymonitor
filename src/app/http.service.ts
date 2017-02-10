@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 
-declare var gapi: any;
-declare var moment: any;
+declare let gapi: any;
+declare let moment: any;
 
 @Injectable()
 
@@ -66,13 +66,9 @@ export class HttpService {
           this.statusEvent.emit({[roomId]: 'yellow'});
         } else if (start <= currentTime && end >= currentTime) {
           this.statusEvent.emit({[roomId]: 'red'});
-<<<<<<< HEAD
-        } 
-=======
         } else {
           this.statusEvent.emit({[roomId]: 'green'});
         }
->>>>>>> pull
       });      
     });
   };
