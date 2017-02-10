@@ -59,6 +59,7 @@ export class RoomsComponent implements OnDestroy {
       for (const roomKey in roomsObj) {
         if (roomsObj.hasOwnProperty(roomKey)) {
           const room = roomsObj[roomKey]
+          room.busy = 'green';
           this.rooms.push(room)
         }
       }
