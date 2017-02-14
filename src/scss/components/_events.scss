@@ -1,3 +1,13 @@
 .event {
-  color: red;
+  padding: 15px;
+  border-width: 2.5px 5px 2.5px 5px;
+  border-style: solid;
+  border-color: black;
+  &.junior {
+    background: #0090DA;
+  }
+  &.senior {
+    background: #00B398;
+  }
 }
+

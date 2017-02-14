@@ -5,7 +5,7 @@ import { HttpService } from './http.service'
 @Component({
   selector: 'hd-senior-schedule',
   template: `
-  <div *ngFor='let event of events'>{{event.summary}}</div>
+  <div class="event senior" *ngFor='let event of events'>{{event.summary}}</div>
   `,
   providers: [HttpService]
 })
