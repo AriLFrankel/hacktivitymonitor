@@ -1,2 +1,48 @@
-.event{color:red;padding:15px;background:grey;border-width:2.5px 5px 2.5px 5px;border-style:solid;border-color:black}#clock{color:blue}.idk{width:200px}
+.event {
+  padding: 15px;
+  border-width: 2.5px 5px 2.5px 5px;
+  border-style: solid;
+  border-color: black; }
+  .event.junior {
+    background: #0090DA; }
+  .event.senior {
+    background: #00B398; }
+
+#time {
+  color: #0090DA;
+  text-align: center; }
+
+#clock {
+  font-size: 50px; }
+
+.time {
+  margin: 0; }
+
+#minutes {
+  color: #00B398; }
+
+.col-md-4 {
+  padding: 0;
+  background: black; }
+
+.room2 {
+  margin: 0; }
+  .room2.a {
+    color: black; }
+
+.status {
+  height: 18px;
+  width: 18px;
+  border-style: solid;
+  border-color: white;
+  border-radius: 50%;
+  margin-top: 2.5px;
+  margin-left: 35px; }
+
+.room-name {
+  color: #0090DA; }
+
+html {
+  background: black; }
+
 /*# sourceMappingURL=main.css.map */

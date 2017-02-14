@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 
+declare const $: any
+
 @Component({
   selector: 'hd-clock',
   template: `
-    <div id="time"></div>
+    <div class="row time" id="time"></div>
   `,
   styles: []
 })
@@ -11,21 +13,22 @@ export class ClockComponent implements OnInit {
 
   ngOnInit() {
     function startTime() {
-    const today = new Date()
-    const h = today.getHours()
-    let m = today.getMinutes()
-    let s = today.getSeconds()
-    m = checkTime(m)
-    s = checkTime(s)
-    document.getElementById('time').innerHTML =
-    h + ':' + m + ':' + s
-    const t = setTimeout(startTime, 500)
+      const today = new Date()
+      const h = today.getHours()
+      let m = today.getMinutes()
+      let s = today.getSeconds()
+      m = checkTime(m)
+      s = checkTime(s)
+
+      $('#time').empty().append(`<div class="col-md-12" id="clock"><span id="hours">${h}</span>:<span id="minutes">${m}</span>:<span id="seconds">${s}</span></div>`)
+
+      const t = setTimeout(startTime, 500)
+      }
+      function checkTime(i) {
+          if (i < 10) {i = '0' + i}  // add zero in front of numbers < 10
+          return i
+      }
+      startTime()
     }
-    function checkTime(i) {
-        if (i < 10) {i = '0' + i}  // add zero in front of numbers < 10
-        return i
-    }
-    startTime()
-  }
 
 }

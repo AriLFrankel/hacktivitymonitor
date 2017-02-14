@@ -5,11 +5,14 @@ import { HttpService } from './http.service'
   selector: 'hd-rooms',
   template:
   `
-    <div *ngFor='let room of rooms'
-    id={{room.id}} [ngClass]="room"
-    [(style.background)]='room.busy'
+    <div class="room2 row" *ngFor='let room of rooms'
+    [ngClass]="room"
     >
-    <a [routerLink]='[room.summary.slice(6)]'>{{room.summary.slice(6)}}</a>
+      <div class="col-md-8"><a class="room-name" [routerLink]='[room.summary.slice(6)]'>{{room.summary.slice(6)}}</a></div>
+      <div class="status" id={{room.id}}
+      [(style.background)]='room.busy'
+      >
+      </div>
     </div>
   `,
   providers: [HttpService]
@@ -36,7 +39,7 @@ export class RoomsComponent implements OnDestroy {
     const getRooms = this.getRooms.bind( this)
     const getStatuses = this.getStatuses.bind( this)
     setTimeout(getRooms, 1200)
-    setInterval(getStatuses, 1200)
+    setInterval(getStatuses, 3400)
   }
 
   getRooms() {
