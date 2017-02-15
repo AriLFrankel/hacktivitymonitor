@@ -21,10 +21,15 @@ export class WeatherComponent implements OnInit {
       woeid: '',
       unit: 'f',
       success: function (weather) {
-        const html = `<h2><i class="icon-${weather.code}"></i> ${weather.temp}&deg${weather.units.temp}</h2>
-        <ul><li>${weather.city}, ${weather.region}</li>
-        <li class="currently">${weather.currently}'</li>
-        <li>${weather.wind.direction} ${weather.wind.speed} ${weather.units.speed}</li></ul>
+        console.log(weather)
+        const html = `
+        <div class="row">
+          <img class="col-md-8" src=${weather.image}>
+          <div class="col-md-4 info">
+            <h2 style="margin-top:10px;">${weather.temp}&deg${weather.units.temp}</h2>
+            <p>${weather.city}, ${weather.region}</p>
+            <p class="currently">${weather.currently}</p>
+        </div>
         `
         $('#weather').html(html)
       },
