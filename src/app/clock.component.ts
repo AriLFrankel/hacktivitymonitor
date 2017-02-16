@@ -21,8 +21,8 @@ export class ClockComponent implements OnInit {
       s = checkTime(s)
 
       $('#time').empty().append(`<div class="col-md-12" id="clock"><span id="hours">${h}</span>
-        :<span id="minutes">${m}</span>
-        :<span id="seconds">${s}</span></div>`)
+        : <span id="minutes">${m}</span>
+        : <span id="seconds">${s}</span></div>`)
 
       const t = setTimeout(startTime, 500)
       }
