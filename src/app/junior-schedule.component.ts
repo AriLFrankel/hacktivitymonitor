@@ -21,9 +21,18 @@ export class JuniorScheduleComponent {
     ref.detach()
     const getSchedule = this.getSchedule.bind(this)
     setTimeout(getSchedule, 1200)
+    setInterval(getSchedule, 5000)
   }
 
-  getSchedule() {
+  isHappening(start, end, currTime): Boolean {
+    const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
+    endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
+    currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1])
+    return (startHour < currHour || startHour === currHour && startMinute < currMinute) &&
+    (endHour > currHour || endHour === currHour && endMinute > currMinute)
+  }
+
+  getSchedule(): any {
     this.httpService.getEvents('hackreactor.com_ljtk4epeeca4bm4b73m09cb4c4@group.calendar.google.com')
     .then( (events) => {
       this.events = [].concat(events.map( (event) => {
@@ -33,8 +42,8 @@ export class JuniorScheduleComponent {
         + (end.toString().split(':')[1] - start.toString().split(':')[1])
         const padding: string = length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
         : '0px 20px'
-        const opacity: string = moment().format('H:mm') > start && moment().format('H:mm') < end ? '1' : '.3'
-        return Object.assign(event, {start: start, opacity: opacity, padding: padding})
+        const opacity: string = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString()) ? '1' : '.3'
+        return Object.assign(event, {start: start, end: end, opacity: opacity, padding: padding})
         }) )
       this.ref.detectChanges()
     })
