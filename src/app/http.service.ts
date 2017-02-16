@@ -36,6 +36,7 @@ export class HttpService {
       'singleEvents': true
     })
     .then(eventData => {
+      console.log(eventData);
       return eventData.result.items
     })
   }

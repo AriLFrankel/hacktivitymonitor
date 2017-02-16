@@ -1,11 +1,12 @@
 import { Component, ChangeDetectorRef } from '@angular/core'
 import { HttpService } from './http.service'
 
+declare const moment: any
 
 @Component({
   selector: 'hd-senior-schedule',
   template: `
-  <div class="event senior" *ngFor='let event of events'>{{event.summary}}</div>
+  <div *ngFor='let event of events' class="event senior">{{event.summary}} <span *ngIf="event.start">: {{event.start}} </span> </div>
   `,
   providers: [HttpService]
 })
@@ -21,7 +22,12 @@ export class SeniorScheduleComponent {
   getSchedule() {
     this.httpService.getEvents('hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com')
     .then( (events) => {
-      this.events = [].concat(events)
+      this.events = [].concat(events.map( (event) => {
+        const start = event.start.dateTime ? moment(event.start.dateTime).format('h:mm') : false
+        const end = event.start.dateTime ? moment(event.end.dateTime).format('h:mm') : false
+        return Object.assign(event, {start: start, end: end})
+        }) )
+      
       this.ref.detectChanges()
     })
   }
