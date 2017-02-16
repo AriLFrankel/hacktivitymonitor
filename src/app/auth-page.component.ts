@@ -5,14 +5,7 @@ declare var gapi: any
 
 @Component({
   selector: 'hd-auth-page',
-  template: `
-  <div style="display:none">Auth:
-  <br>
-  <button (click)="signIn()">Sign In</button>
-  <button (click)="signOut()">Sign Out</button>
-  <hr>
-  </div>
-  `,
+  template: ``,
   styles: [],
   providers: [AuthService]
 })
