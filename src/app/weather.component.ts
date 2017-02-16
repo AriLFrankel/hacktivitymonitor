@@ -21,10 +21,9 @@ export class WeatherComponent implements OnInit {
       woeid: '',
       unit: 'f',
       success: function (weather) {
-        console.log(weather)
         const html = `
-        <div class="row">
-          <img class="col-md-8" src=${weather.image}>
+        <div class="row weather-container">
+          <img id="weather-image" class="col-md-8" src=${weather.image}>
           <div class="col-md-4 info">
             <h2 style="margin-top:10px;">${weather.temp}&deg${weather.units.temp}</h2>
             <p>${weather.city}, ${weather.region}</p>
