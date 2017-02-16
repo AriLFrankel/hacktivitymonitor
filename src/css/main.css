@@ -44,4 +44,14 @@
 html {
   background: black; }
 
+.info {
+  color: white; }
+
+.weather-container {
+  margin: 0;
+  margin-top: 15px; }
+
+#weather-image {
+  padding: 0; }
+
 /*# sourceMappingURL=main.css.map */
