@@ -21,7 +21,7 @@ export class JuniorScheduleComponent {
     ref.detach()
     const getSchedule = this.getSchedule.bind(this)
     setTimeout(getSchedule, 1200)
-    setInterval(getSchedule, 5000)
+    setInterval(getSchedule, 60000)
   }
 
   isHappening(start, end, currTime): Boolean {
