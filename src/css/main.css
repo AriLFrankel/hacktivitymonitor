@@ -2,7 +2,7 @@
   border-width: 2.5px 5px 2.5px 5px;
   border-style: solid;
   border-color: black;
-  font-size: '20px'; }
+  font-size: 35px; }
   .event.junior {
     background: #0090DA; }
   .event.senior {
@@ -13,7 +13,7 @@
   text-align: center; }
 
 #clock {
-  font-size: 50px; }
+  font-size: 70px; }
 
 .time {
   margin: 0; }
@@ -31,8 +31,8 @@
     color: black; }
 
 .status {
-  height: 20px;
-  width: 20px;
+  height: 35px;
+  width: 35px;
   border-style: solid;
   border-color: white;
   border-radius: 50%;
@@ -40,16 +40,17 @@
   margin-left: 35px; }
 
 .room-name {
-  color: #0090DA; }
+  color: #0090DA;
+  font-size: 35px; }
 
 html {
   background: black; }
   html body {
-    font-family: 'Source Sans Pro';
-    font-size: 20px; }
+    font-family: 'Source Sans Pro'; }
 
 .info {
-  color: white; }
+  color: white;
+  font-size: 20px; }
 
 .weather-container {
   margin: 0;

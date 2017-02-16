@@ -7,7 +7,7 @@ declare const moment: any
   selector: 'hd-senior-schedule',
   template: `
   <div *ngFor='let event of events'
-  [ngStyle]="{padding:event.padding, opacity:event.opacity}" class="senior event">
+  [ngStyle]="{padding:event.padding, opacity:event.opacity, display:event.display}" class="senior event">
   <span *ngIf="event.start">{{event.start}} </span> {{event.summary}}
   </div>
   `,
@@ -31,6 +31,14 @@ export class SeniorScheduleComponent {
     (endHour > currHour || endHour === currHour && endMinute > currMinute)
   }
 
+  isRelevant(start, end, currTime): boolean {
+    const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
+    endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
+    currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
+    threeHoursFromNowHour = Number(currTime.split(':')[0]) + 3 , threeHoursAgoHour = Number(currTime.split(':')[0]) - 3
+    return startHour >= threeHoursAgoHour && endHour <= threeHoursFromNowHour
+  }
+
   getSchedule() {
     this.httpService.getEvents('hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com')
     .then( (events) => {
@@ -42,7 +50,8 @@ export class SeniorScheduleComponent {
         const padding: string = length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
         : '0px 20px'
         const opacity: string = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString()) ? '1' : '.3'
-        return Object.assign(event, {start: start, end: end, opacity: opacity, padding: padding})
+        const display: string = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString()) ? 'block' : 'none'
+        return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})
         }) )
       this.ref.detectChanges()
     })
