@@ -5,7 +5,7 @@ declare const $: any
 @Component({
   selector: 'hd-clock',
   template: `
-    <div class="row time" id="time"></div>
+    <div class="row time" style="font-family:'Orbitron'" id="time"></div>
   `,
   styles: []
 })
