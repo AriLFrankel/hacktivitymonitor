@@ -45,13 +45,13 @@ export class JuniorScheduleComponent {
     this.httpService.getEvents(roomDictionary['Junior'])
     .then( (events) => {
       this.events = [].concat(events.map( (event) => {
-        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : 'allDay'
-        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : 'allDay'
+        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : ''
+        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : ''
         const length: number = (end.toString().split(':')[0] - start.toString().split(':')[0]) * 60
         + (end.toString().split(':')[1] - start.toString().split(':')[1])
         const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
         const isRelevant: boolean = isHappening ? true
-        : start === 'allDay' ? true
+        : start === '' ? true
         : this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
         const padding: string = isHappening ? '50px 20px'
         // : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
