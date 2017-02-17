@@ -36,8 +36,8 @@ export class SeniorScheduleComponent {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
-    threeHoursFromNowHour = Number(currTime.split(':')[0]) + 3 , threeHoursAgoHour = Number(currTime.split(':')[0]) - 3
-    return startHour >= threeHoursAgoHour && endHour <= threeHoursFromNowHour
+    twoFromNowHour = Number(currTime.split(':')[0]) + 2 , twoAgoHour = Number(currTime.split(':')[0]) - 2
+    return startHour >= twoAgoHour && endHour <= twoFromNowHour
   }
 
   getSchedule() {
@@ -51,8 +51,8 @@ export class SeniorScheduleComponent {
         const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
         const isRelevant: boolean = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
         const padding: string = isHappening ? '50px 20px'
-        : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
-        : '0px 20px'
+        // : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
+        : '10px 20px'
         const opacity: string = isHappening ? '1' : '.75'
         const display: string = isRelevant ? 'block' : 'none'
         return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})

@@ -52,8 +52,8 @@ export class JuniorScheduleComponent {
         const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
         const isRelevant: boolean = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
         const padding: string = isHappening ? '50px 20px'
-        : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
-        : '0px 20px'
+        // : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
+        : '10px 20px'
         const opacity: string = isHappening ? '1' : '.75'
         const display: string = isRelevant ? 'block' : 'none'
         return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})

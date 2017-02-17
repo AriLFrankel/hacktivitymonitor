@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'
 import { HttpService } from './http.service'
 import { roomDictionary } from './room-dictionary'
 
+declare const $: any
+
 @Component({
   selector: 'hd-rooms',
   template:
@@ -12,7 +14,7 @@ import { roomDictionary } from './room-dictionary'
       [(style.background)]='room.busy'
       ></div>
     </div>
-    <iframe src="https://helpdesk.makerpass.com/"></iframe>
+    <iframe id='helpdesk' src="https://helpdesk.makerpass.com/"></iframe>
   `,
   providers: [HttpService]
 })
@@ -40,6 +42,7 @@ export class RoomsComponent implements OnDestroy {
     setTimeout(getRooms, 1200)
     setTimeout(getStatuses, 2400)
     setInterval(getStatuses, 60000)
+    setInterval(()=>{$('#helpdesk').content().scrollTop($('#helpdesk').height())}, 2400)
   }
 
   getRooms() {
