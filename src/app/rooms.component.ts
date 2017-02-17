@@ -41,7 +41,6 @@ export class RoomsComponent implements OnDestroy {
     setTimeout(getRooms, 1200)
     setTimeout(getStatuses, 2400)
     setInterval(getStatuses, 60000)
-    setInterval(()=>{$('#helpdesk').content().scrollTop($('#helpdesk').height())}, 2400)
   }
 
   getRooms() {

@@ -36,20 +36,22 @@ export class SeniorScheduleComponent {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
-    twoFromNowHour = Number(currTime.split(':')[0]) + 2 , twoAgoHour = Number(currTime.split(':')[0]) - 2
-    return startHour >= twoAgoHour && endHour <= twoFromNowHour
+    twoFromNowHour = Number(currTime.split(':')[0]) + 2
+    return startHour >= currHour && startMinute >= currMinute - 5 && endHour <= twoFromNowHour
   }
 
   getSchedule() {
     this.httpService.getEvents(roomDictionary['Senior'])
     .then( (events) => {
       this.events = [].concat(events.map( (event) => {
-        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : false
-        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : false
+        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : 'allDay'
+        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : 'allDay'
         const length: number = (end.toString().split(':')[0] - start.toString().split(':')[0]) * 60
         + (end.toString().split(':')[1] - start.toString().split(':')[1])
         const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
-        const isRelevant: boolean = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
+        const isRelevant: boolean = isHappening ? true 
+        : start === 'allDay' ? true 
+        : this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
         const padding: string = isHappening ? '50px 20px'
         // : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
         : '10px 20px'

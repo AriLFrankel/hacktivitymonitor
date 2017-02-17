@@ -37,23 +37,25 @@ export class JuniorScheduleComponent {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
-    twoHoursFromNowHour = Number(currTime.split(':')[0]) + 2 , twoHoursAgoHour = Number(currTime.split(':')[0]) - 2
-    return startHour >= twoHoursAgoHour && endHour <= twoHoursFromNowHour
+    twoFromNowHour = Number(currTime.split(':')[0]) + 2
+    return startHour >= currHour && startMinute >= currMinute - 5 && endHour <= twoFromNowHour
   }
 
   getSchedule(): void {
     this.httpService.getEvents(roomDictionary['Junior'])
     .then( (events) => {
       this.events = [].concat(events.map( (event) => {
-        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : false
-        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : false
+        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : 'allDay'
+        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : 'allDay'
         const length: number = (end.toString().split(':')[0] - start.toString().split(':')[0]) * 60
         + (end.toString().split(':')[1] - start.toString().split(':')[1])
         const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
-        const isRelevant: boolean = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
+        const isRelevant: boolean = isHappening ? true
+        : start === 'allDay' ? true
+        : this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
         const padding: string = isHappening ? '50px 20px'
         // : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
-        : '0px 20px'
+        : '10px 20px'
         const opacity: string = isHappening ? '1' : '.75'
         const display: string = isRelevant ? 'block' : 'none'
         return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})
