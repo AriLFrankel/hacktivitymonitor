@@ -5,14 +5,14 @@ import { Component } from '@angular/core'
   template: `
     <hd-auth-page></hd-auth-page>
     <div class="row">
-      <hd-senior-schedule class="col-md-4"></hd-senior-schedule>
-      <div class="col-md-4">
-        <hd-weather></hd-weather>
-        <hd-clock></hd-clock>
-        <hd-rooms></hd-rooms>
-        <img src='http://hrhqdir.s3.amazonaws.com/brand-guide/HackReactor_RGBLogo-White-Blue.png' width="100%">
-      </div>
-      <hd-junior-schedule class="col-md-4"></hd-junior-schedule> 
+      <hd-weather class="col-md-4"></hd-weather>
+      <div class="col-md-4"><img id='logo' src='./Final.png'></div>
+      <hd-clock class="col-md-4"></hd-clock>
+    </div>
+    <div class="row">
+      <hd-senior-schedule class="col-md-4 schedule"></hd-senior-schedule>
+      <hd-rooms class="col-md-4 center"></hd-rooms>
+      <hd-junior-schedule class="col-md-4 schedule"></hd-junior-schedule> 
     </div>
   `
 })

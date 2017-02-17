@@ -1,11 +1,14 @@
 .info {
   color: white;
-  font-size: 20px;
+  font-size: 25px;
+  height: 20vh;
 }
 .weather-container {
   margin: 0;
-  margin-top: 15px;
+  height: 20vh;
 }
 #weather-image {
   padding: 0;
+  height: 100%;
+  width: auto;
 }

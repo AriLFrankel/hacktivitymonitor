@@ -6,10 +6,10 @@ declare const moment: any
 @Component({
   selector: 'hd-junior-schedule',
   template: `
-  <div *ngFor='let event of events'
-  [ngStyle]="{padding:event.padding, opacity:event.opacity, display:event.display}" class="junior event">
-  <span *ngIf="event.start">{{event.start}} </span> {{event.summary}}
-  </div>
+    <div *ngFor='let event of events'
+    [ngStyle]="{padding:event.padding, opacity:event.opacity, display:event.display}" class="junior event">
+    <span *ngIf="event.start">{{event.start}} </span> {{event.summary}}
+    </div>
   `,
   providers: [HttpService]
 })
@@ -24,7 +24,7 @@ export class JuniorScheduleComponent {
     setInterval(getSchedule, 60000)
   }
 
-  isHappening(start, end, currTime): Boolean {
+  isHappening(start, end, currTime): boolean {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1])
@@ -48,10 +48,13 @@ export class JuniorScheduleComponent {
         const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : false
         const length: number = (end.toString().split(':')[0] - start.toString().split(':')[0]) * 60
         + (end.toString().split(':')[1] - start.toString().split(':')[1])
-        const padding: string = length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
+        const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
+        const isRelevant: boolean = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
+        const padding: string = isHappening ? '50px 20px'
+        : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
         : '0px 20px'
-        const opacity: string = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString()) ? '1' : '.3'
-        const display: string = this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString()) ? 'block' : 'none'
+        const opacity: string = isHappening ? '1' : '.75'
+        const display: string = isRelevant ? 'block' : 'none'
         return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})
         }) )
       this.ref.detectChanges()
