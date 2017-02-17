@@ -53,7 +53,7 @@ html {
 
 .info {
   color: white;
-  font-size: 25px;
+  font-size: 30px;
   height: 20vh; }
 
 .weather-container {
@@ -61,7 +61,7 @@ html {
   height: 20vh; }
 
 #weather-image {
-  padding: 0;
+  padding: 0 10%;
   height: 100%;
   width: auto; }
 

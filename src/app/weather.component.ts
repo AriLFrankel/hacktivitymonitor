@@ -25,9 +25,10 @@ export class WeatherComponent implements OnInit {
         <div class="row weather-container">
           <img id="weather-image" class="col-md-8" src=${weather.image}>
           <div class="col-md-4 info">
-            <h2 style="margin-top:10px;">${weather.temp}&deg${weather.units.temp}</h2>
-            <p>${weather.city}, ${weather.region}</p>
-            <p class="currently">${weather.currently}</p>
+            <div>${weather.temp}&deg${weather.units.temp}</div>
+            <div>${weather.currently}</div>
+            <div>${weather.city}, ${weather.region}</div>
+          </div>
         </div>
         `
         $('#weather').html(html)
