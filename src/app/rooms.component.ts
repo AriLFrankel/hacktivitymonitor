@@ -14,7 +14,6 @@ declare const $: any
       [(style.background)]='room.busy'
       ></div>
     </div>
-    <iframe id='helpdesk' src="https://helpdesk.makerpass.com/"></iframe>
   `,
   providers: [HttpService]
 })
