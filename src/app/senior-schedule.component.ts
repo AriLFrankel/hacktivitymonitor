@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core'
 import { HttpService } from './http.service'
+import { roomDictionary } from './room-dictionary'
 
 declare const moment: any
 
@@ -27,7 +28,7 @@ export class SeniorScheduleComponent {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1])
-    return (startHour < currHour || startHour === currHour && startMinute < currMinute) &&
+    return (startHour < currHour || startHour === currHour && startMinute < currMinute - 2) &&
     (endHour > currHour || endHour === currHour && endMinute > currMinute)
   }
 
@@ -40,7 +41,7 @@ export class SeniorScheduleComponent {
   }
 
   getSchedule() {
-    this.httpService.getEvents('hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com')
+    this.httpService.getEvents(roomDictionary['Senior'])
     .then( (events) => {
       this.events = [].concat(events.map( (event) => {
         const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : false

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'
 import { HttpService } from './http.service'
+import { roomDictionary } from './room-dictionary'
 
 @Component({
   selector: 'hd-rooms',
@@ -43,18 +44,13 @@ export class RoomsComponent implements OnDestroy {
   getRooms() {
     this.httpService.getRooms(
       [
-       'hackreactor.com_2d373931333934353637@resource.calendar.google.com',
-       'hackreactor.com_32333137383234383439@resource.calendar.google.com',
-       'hackreactor.com_3538363731393438383137@resource.calendar.google.com',
-       'hackreactor.com_3136303231303936383132@resource.calendar.google.com',
-       'hackreactor.com_3532303334313531373535@resource.calendar.google.com',
-       'hackreactor.com_38343938353038373437@resource.calendar.google.com',
-       /*'hackreactor.com_ljtk4epeeca4bm4b73m09cb4c4@group.calendar.google.com',
-       'hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com',*/
-       'hackreactor.com_3836363230383730323630@resource.calendar.google.com',
-       /*'hackreactor.com_2d3433363932323136393534@resource.calendar.google.com',
-       'hackreactor.com_2d3231313833303133383036@resource.calendar.google.com',*/
-        ])
+        roomDictionary.Hamilton,
+        roomDictionary.Ellis,
+        roomDictionary.Lovelace,
+        roomDictionary.Hopper,
+        roomDictionary.Turing,
+        roomDictionary.Djikstra
+      ])
     .then( (roomsObj) => {
       this.rooms = []
       this.events = []

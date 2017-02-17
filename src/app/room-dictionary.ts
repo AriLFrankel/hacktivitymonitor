@@ -18,6 +18,7 @@ export const roomDictionary = {
   'Senior': 'hackreactor.com_9kddcjfdij7ak91o0t2bdlpnoo@group.calendar.google.com',
   'Junior': 'hackreactor.com_ljtk4epeeca4bm4b73m09cb4c4@group.calendar.google.com',
   'Hamilton': 'hackreactor.com_3836363230383730323630@resource.calendar.google.com',
+  'Ellis': 'hackreactor.com_38343938353038373437@resource.calendar.google.com',
   'Junior Open Classroom' : 'hackreactor.com_2d3433363932323136393534@resource.calendar.google.com',
   'Senior Open Classroom' : 'hackreactor.com_2d3231313833303133383036@resource.calendar.google.com'
 }
