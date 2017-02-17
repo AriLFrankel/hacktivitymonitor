@@ -47,6 +47,10 @@
   color: #0090DA;
   font-size: 35px; }
 
+iframe {
+  width: 100%;
+  height: 500px; }
+
 html {
   background: black; }
   html body {

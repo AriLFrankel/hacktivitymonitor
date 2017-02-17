@@ -12,6 +12,7 @@ import { roomDictionary } from './room-dictionary'
       [(style.background)]='room.busy'
       ></div>
     </div>
+    <iframe src="https://helpdesk.makerpass.com/"></iframe>
   `,
   providers: [HttpService]
 })
