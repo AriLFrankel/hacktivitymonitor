@@ -29,7 +29,7 @@ export class JuniorScheduleComponent {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1])
-    return (startHour < currHour || startHour === currHour && startMinute < currMinute - 2) &&
+    return (startHour < currHour || startHour === currHour && startMinute < currMinute + 2) &&
     (endHour > currHour || endHour === currHour && endMinute > currMinute)
   }
 
