@@ -60,7 +60,7 @@ export class HttpService {
     }).execute( (response) => {
       console.log(response.result.calendars[roomId])
       response.result.calendars[roomId].busy.forEach((busyObj) => {
-        console.log(busyObj)
+        // console.log(busyObj)
         const start = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString()
         const end = moment(busyObj.end).add(-6, 'h').add(-1, 'm').toISOString()
         if (start <= thirtyFromNow && start >= currentTime) {
