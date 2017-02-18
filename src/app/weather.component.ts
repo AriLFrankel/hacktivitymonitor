@@ -13,7 +13,7 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit() {
     this.loadWeather()
-    setInterval(this.loadWeather.bind(this),600000)
+    setInterval(this.loadWeather.bind(this), 600000)
   }
 
   loadWeather() {

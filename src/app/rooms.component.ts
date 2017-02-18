@@ -8,7 +8,7 @@ declare const $: any
   selector: 'hd-rooms',
   template:
   `
-    <div class="room2 row col-md-12" *ngFor='let room of rooms'>
+    <div *ngFor='let room of rooms' class="room2 row col-md-12" >
       <a class="room-name" [routerLink]='[room.summary.slice(6)]'>{{room.summary.slice(6)}}</a>
       <div class="status" id={{room.id}}
       [(style.background)]='room.busy'
@@ -38,14 +38,12 @@ export class RoomsComponent implements OnDestroy {
     })
     const getRooms = this.getRooms.bind( this)
     const getStatuses = this.getStatuses.bind( this)
-    setTimeout(getRooms, 1200)
-    setTimeout(getStatuses, 2400)
-    setInterval(getStatuses, 60000)
+    setTimeout( getRooms, 1200)
+    setInterval( getStatuses, 60000)
   }
 
   getRooms() {
-    this.httpService.getRooms(
-      [
+    this.httpService.getRooms([
         roomDictionary.Hamilton,
         roomDictionary.Ellis,
         roomDictionary.Lovelace,
@@ -53,16 +51,16 @@ export class RoomsComponent implements OnDestroy {
         roomDictionary.Turing,
         roomDictionary.Djikstra
       ])
-    .then( (roomsObj) => {
-      this.rooms = []
+    .then( (roomsArr) => {
       this.events = []
-      for (const roomKey in roomsObj) {
-        if (roomsObj.hasOwnProperty(roomKey)) {
-          const room = roomsObj[roomKey]
+      for (const roomKey in roomsArr) {
+        if (roomsArr.hasOwnProperty(roomKey)) {
+          const room = roomsArr[roomKey]
           room.busy = 'green'
           this.rooms.push(room)
         }
       }
+      this.ref.detectChanges()
     })
   }
 
