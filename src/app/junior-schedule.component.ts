@@ -34,11 +34,13 @@ export class JuniorScheduleComponent {
   }
 
   isRelevant(start, end, currTime): boolean {
+
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
     twoFromNowHour = Number(currTime.split(':')[0]) + 2
-    return startHour >= currHour && startMinute >= currMinute - 5 && endHour <= twoFromNowHour
+    console.log(start, end, currTime, startHour >= currHour && startMinute >= currMinute - 5)
+    return startHour >= currHour || startHour === currHour && startMinute >= currMinute - 5
   }
 
   getSchedule(): void {
@@ -54,12 +56,12 @@ export class JuniorScheduleComponent {
         : start === '' ? true
         : this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
         const padding: string = isHappening ? '50px 20px'
-        // : length ? length / 3 > 40 ? '30px 20px' : Math.floor(length / 3).toString() + 'px 20px'
         : '10px 20px'
         const opacity: string = isHappening ? '1' : '.75'
         const display: string = isRelevant ? 'block' : 'none'
         return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})
-        }) )
+        })
+      ).filter( event => event.display === 'block').slice(0, 5)
       this.ref.detectChanges()
     })
   }
