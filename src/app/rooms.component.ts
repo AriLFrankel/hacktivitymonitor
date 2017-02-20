@@ -22,7 +22,6 @@ export class RoomsComponent implements OnDestroy {
   events: any[] = []
   subscription: any
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
-    ref.detach()
     this.subscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
       for (const roomBusyKey in roomBusy) {
@@ -39,6 +38,7 @@ export class RoomsComponent implements OnDestroy {
     const getRooms = this.getRooms.bind( this)
     const getStatuses = this.getStatuses.bind( this)
     setTimeout( getRooms, 1200)
+    getStatuses.call(this)
     setInterval( getStatuses, 60000)
   }
 

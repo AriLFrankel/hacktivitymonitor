@@ -39,7 +39,6 @@ export class JuniorScheduleComponent {
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
     currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
     twoFromNowHour = Number(currTime.split(':')[0]) + 2
-    console.log(start, end, currTime, startHour >= currHour && startMinute >= currMinute - 5)
     return startHour >= currHour || startHour === currHour && startMinute >= currMinute - 5
   }
 

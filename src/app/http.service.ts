@@ -45,7 +45,8 @@ export class HttpService {
     return this
   }
 
-   getStatus(roomId: string) {
+  getStatus(roomId: string) {
+    console.log('getting status')
     const currentTime = moment().add(-6, 'h').toISOString(),
     thirtyFromNow = moment().add(-5.5, 'h').toISOString()
     gapi.client.calendar.freebusy.query({
@@ -57,7 +58,8 @@ export class HttpService {
           'id': roomId
         }
       ]
-    }).execute( (response) => {
+    })
+    .execute( (response) => {
       console.log(response.result.calendars[roomId])
       response.result.calendars[roomId].busy.forEach((busyObj) => {
         // console.log(busyObj)
