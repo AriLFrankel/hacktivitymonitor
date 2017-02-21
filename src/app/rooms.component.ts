@@ -39,7 +39,7 @@ export class RoomsComponent implements OnDestroy {
     const getRooms = this.getRooms.bind( this)
     const getStatuses = this.getStatuses.bind( this)
     setTimeout( getRooms, 1200)
-    getStatuses()
+    setTimeout( getStatuses, 1500)
     setInterval( getStatuses, 60000)
   }
 
@@ -57,7 +57,6 @@ export class RoomsComponent implements OnDestroy {
       for (const roomKey in roomsArr) {
         if (roomsArr.hasOwnProperty(roomKey)) {
           const room = roomsArr[roomKey]
-          room.busy = 'green'
           this.rooms.push(room)
         }
       }

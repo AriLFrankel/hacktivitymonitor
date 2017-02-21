@@ -38,6 +38,7 @@ export class HttpService {
     .then(eventData => {
       return eventData.result.items
     })
+
   }
 
   addHours= function(h) {
@@ -46,7 +47,6 @@ export class HttpService {
   }
 
   getStatus(roomId: string) {
-    console.log('getting status')
     const currentTime = moment().add(-6, 'h').toISOString(),
     thirtyFromNow = moment().add(-5.5, 'h').toISOString()
     gapi.client.calendar.freebusy.query({
@@ -60,8 +60,9 @@ export class HttpService {
       ]
     })
     .execute( (response) => {
+      console.log('BUSY STUFF', response.result.calendars[roomId].busy.length)
+
       response.result.calendars[roomId].busy.forEach((busyObj) => {
-        // console.log(busyObj)
         const start = moment(busyObj.start).add(-6, 'h').add(-1, 'm').toISOString()
         const end = moment(busyObj.end).add(-6, 'h').add(-1, 'm').toISOString()
         if (start <= thirtyFromNow && start >= currentTime) {
@@ -72,6 +73,10 @@ export class HttpService {
           this.statusEvent.emit({[roomId]: 'green'})
         }
       })
+
+      if (response.result.calendars[roomId].busy.length == 0) {
+        this.statusEvent.emit({[roomId]: 'green'})
+      }
     })
   }
 }
