@@ -2,19 +2,21 @@ import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { HttpService } from './http.service'
 import { AuthService } from './auth-service.service'
-import { roomDictionary} from './room-dictionary'
+import { roomDictionary } from './room-dictionary'
 
 @Component({
   selector: 'hd-room-schedule',
   template: `
     <div >{{roomId}}</div>
     <div *ngFor='let event of events'>{{event.summary}}</div>
+    <hd-gooey></hd-gooey>
   `,
   providers: [HttpService, AuthService]
 })
 
 export class RoomScheduleComponent implements OnDestroy {
   subscription: any
+  subscription2: any
   public roomId: string
   private roomName: string
   room: any
@@ -27,7 +29,7 @@ export class RoomScheduleComponent implements OnDestroy {
               private authService: AuthService,
               private ref: ChangeDetectorRef
              ) {
-    this.subscription = this.httpService.statusEvent
+    this.subscription2 = this.httpService.statusEvent
     .subscribe(roomBusy => {
       console.log('roomBusy: ', roomBusy)
       this.room = roomBusy
@@ -43,10 +45,11 @@ export class RoomScheduleComponent implements OnDestroy {
       // }
     })
     this.authService.signIn()
-    this.getEvents.call(this)
+    this.getEvents()
     setInterval(this.getEvents.bind(this), 3000);
+    console.log(this.httpService.getStatus)
     this.httpService.getStatus(this.roomId)
-      .then(data => console.log(data))
+    setInterval(() => {this.httpService.getStatus(this.roomId)}, 3000);
   }
 
   getEvents() {
@@ -67,6 +70,7 @@ export class RoomScheduleComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
+    this.subscription2.unsubscribe()
   }
 
 }

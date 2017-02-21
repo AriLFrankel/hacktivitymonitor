@@ -10,6 +10,7 @@ import { RoomScheduleComponent } from './room-schedule.component'
 import { JuniorScheduleComponent } from './junior-schedule.component'
 import { SeniorScheduleComponent } from './senior-schedule.component'
 import { HackerspaceComponent } from './hackerspace-component.component'
+import { GooeyNav } from './gooey-nav.component'
 
 import { routing } from './app.routing'
 import { ApiGuard } from './api.guard'
@@ -27,7 +28,8 @@ import { ClockComponent } from './clock.component'
     SeniorScheduleComponent,
     HackerspaceComponent,
     WeatherComponent,
-    ClockComponent
+    ClockComponent,
+    GooeyNav
   ],
   imports: [
     BrowserModule,
