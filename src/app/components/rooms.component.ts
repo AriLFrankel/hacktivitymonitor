@@ -36,10 +36,15 @@ export class RoomsComponent implements OnDestroy {
       }
     })
     const getStatuses = this.getStatuses.bind( this)
+<<<<<<< HEAD:src/app/components/rooms.component.ts
     const getRooms = this.getRooms.bind( this)
     setTimeout(getRooms, 1200)
     setTimeout((getStatuses), 3000)
     setInterval(getStatuses, 60000)
+=======
+    setTimeout( getRooms, 1200)
+    setInterval( getStatuses, 60000)
+>>>>>>> 4e96c123f84402367e7c8a9043aa9282e1f666c5:src/app/rooms.component.ts
   }
 
   getRooms() {
@@ -52,9 +57,17 @@ export class RoomsComponent implements OnDestroy {
         roomDictionary.Djikstra
       ])
     .then( (roomsArr) => {
+<<<<<<< HEAD:src/app/components/rooms.component.ts
       for (const roomKey in roomsArr) {
         if (roomsArr.hasOwnProperty(roomKey)) {
           const room = roomsArr[roomKey]
+=======
+      this.events = []
+      for (const roomKey in roomsArr) {
+        if (roomsArr.hasOwnProperty(roomKey)) {
+          const room = roomsArr[roomKey]
+          room.busy = 'green'
+>>>>>>> 4e96c123f84402367e7c8a9043aa9282e1f666c5:src/app/rooms.component.ts
           this.rooms.push(room)
         }
       }
