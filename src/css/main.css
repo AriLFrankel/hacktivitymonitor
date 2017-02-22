@@ -7,11 +7,11 @@
   font-size: 35px;
 }
 /* line 8, ../scss/components/_events.scss */
-.event.junior {
+.event.Junior {
   background: #0090DA;
 }
 /* line 11, ../scss/components/_events.scss */
-.event.senior {
+.event.Senior {
   background: #00B398;
 }
 

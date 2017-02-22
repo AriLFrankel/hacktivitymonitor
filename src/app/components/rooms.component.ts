@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'
-import { HttpService } from './http.service'
-import { roomDictionary } from './room-dictionary'
+import { HttpService } from '../shared/http.service'
+import { roomDictionary } from '../shared/room-dictionary'
 
 declare const $: any
 
@@ -19,10 +19,9 @@ declare const $: any
 })
 export class RoomsComponent implements OnDestroy {
   rooms: any[] = []
-  events: any[] = []
-  subscription: any
+  statusSubscription: any
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
-    this.subscription = this.httpService.statusEvent
+    this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
       this.ref.detach()
       for (const roomBusyKey in roomBusy) {
@@ -36,10 +35,10 @@ export class RoomsComponent implements OnDestroy {
         }
       }
     })
-    const getRooms = this.getRooms.bind( this)
     const getStatuses = this.getStatuses.bind( this)
+    const getRooms = this.getRooms.bind( this)
     setTimeout(getRooms, 1200)
-    setTimeout(getStatuses, 3000)
+    setTimeout((getStatuses), 3000)
     setInterval(getStatuses, 60000)
   }
 
@@ -53,7 +52,6 @@ export class RoomsComponent implements OnDestroy {
         roomDictionary.Djikstra
       ])
     .then( (roomsArr) => {
-      this.events = []
       for (const roomKey in roomsArr) {
         if (roomsArr.hasOwnProperty(roomKey)) {
           const room = roomsArr[roomKey]
@@ -71,6 +69,6 @@ export class RoomsComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.statusSubscription.unsubscribe()
   }
 }
