@@ -86,6 +86,7 @@ html {
 /* line 3, ../scss/components/_background.scss */
 html body {
   font-family: 'Source Sans Pro';
+  background: black;
 }
 
 /* line 1, ../scss/components/_weather.scss */
