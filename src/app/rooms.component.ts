@@ -38,9 +38,9 @@ export class RoomsComponent implements OnDestroy {
     })
     const getRooms = this.getRooms.bind( this)
     const getStatuses = this.getStatuses.bind( this)
-    setTimeout( getRooms, 1200)
-    setTimeout( getStatuses, 3000)
-    setInterval( getStatuses, 60000)
+    setTimeout(getRooms, 1200)
+    setTimeout(getStatuses, 3000)
+    setInterval(getStatuses, 60000)
   }
 
   getRooms() {

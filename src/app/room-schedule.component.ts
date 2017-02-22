@@ -31,29 +31,17 @@ export class RoomScheduleComponent implements OnDestroy {
              ) {
     this.subscription2 = this.httpService.statusEvent
     .subscribe(roomBusy => {
-      console.log('roomBusy: ', roomBusy)
       this.room = roomBusy
       this.ref.detectChanges()
-      // for (const roomBusyKey in roomBusy) {
-      //   if (roomBusy.hasOwnProperty(roomBusyKey)) {
-
-      //     if (this.room.hasOwnProperty(roomKey) && this.room[roomKey].id === roomBusyKey) {
-      //       this.room[roomKey].busy = roomBusy[roomBusyKey]
-      //       this.ref.detectChanges()
-      //     }
-      //   }
-      // }
     })
     this.authService.signIn()
     this.getEvents()
     setInterval(this.getEvents.bind(this), 3000);
-    console.log(this.httpService.getStatus)
     this.httpService.getStatus(this.roomId)
     setInterval(() => {this.httpService.getStatus(this.roomId)}, 3000);
   }
 
   getEvents() {
-    console.log('getting events')
     this.subscription = this.route.params.subscribe(
     (params: any) => {
       this.roomId = roomDictionary[params['roomName']]
@@ -72,5 +60,4 @@ export class RoomScheduleComponent implements OnDestroy {
     this.subscription.unsubscribe()
     this.subscription2.unsubscribe()
   }
-
 }
