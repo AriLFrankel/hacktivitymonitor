@@ -309,7 +309,7 @@ html body {
   font-size: 100px;
 }
 /* line 14, ../scss/components/_room-schedule.scss */
-.room-status #Available {
+.room-status #AvailableBusy {
   text-transform: uppercase;
   font-size: 100px;
 }

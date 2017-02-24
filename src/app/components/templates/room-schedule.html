@@ -4,9 +4,9 @@
   <div class="bumper"></div>
   <hd-clock id="time-room"></hd-clock>
   <div class="room-status">
-    <div id="Available">Available</div>
-    <div id="at" *ngIf="roomStatus === 'red' || roomStatus === 'yellow'">at</div>
-    <div id="until" *ngIf="roomStatus === 'green'">until</div>
+    <div *ngIf="roomStatus === 'green'" id="AvailableBusy">Available</div>
+    <div id="AvailableBusy" *ngIf="roomStatus === 'red' || roomStatus === 'yellow'">Busy</div>
+    <div id="until">until</div>
     <div id="statusChangeTime">{{statusChangeTime}}</div>
   </div>
 </div>
