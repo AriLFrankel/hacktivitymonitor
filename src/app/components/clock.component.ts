@@ -5,7 +5,7 @@ declare const $: any
 @Component({
   selector: 'hd-clock',
   template: `
-    <div class="row" style="font-family:'Orbitron'" id="time"></div>
+    <div class="row time" style="font-family:'Orbitron'"></div>
   `,
   styles: []
 })
@@ -20,7 +20,7 @@ export class ClockComponent implements OnInit {
       m = checkTime(m)
       s = checkTime(s)
 
-      $('#time').empty().append(`<div class="col-md-12" id="clock"><span id="hours">${h}</span>
+      $('.time').empty().append(`<div class="col-md-12" id="clock"><span id="hours">${h}</span>
         : <span id="minutes">${m}</span>
         : <span id="seconds">${s}</span></div>`)
 

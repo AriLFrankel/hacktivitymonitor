@@ -1,14 +1,27 @@
-#time {
+#time-main {
   color: #0090DA;
   text-align: center;
   margin: 0;
+  #clock {
+    font-size: 75px;
+    padding-top: 10px;
+  }
+  #minutes {
+    color: #00B398;
+  }
 }
 
-#clock {
-  font-size: 75px;
-  padding-top: 10px;
-}
-
-#minutes {
-  color: #00B398;
+#time-room {
+  color: #000;
+  text-align: center;
+  #clock {
+    font-size: 100px;
+    padding-top: 10px;
+  }
+  #minutes {
+    color: #000;
+  }
+  .row {
+    margin: 0
+  }
 }
