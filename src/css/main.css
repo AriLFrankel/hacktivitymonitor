@@ -1,40 +1,78 @@
+/* line 1, ../scss/components/_events.scss */
 .event {
   border-width: 2.5px 5px 2.5px 5px;
   border-style: solid;
   border-color: black;
   border-radius: 10px;
-  font-size: 35px; }
-  .event.junior {
-    background: #0090DA; }
-  .event.senior {
-    background: #00B398; }
+  font-size: 35px;
+}
+/* line 8, ../scss/components/_events.scss */
+.event.Junior {
+  background: #0090DA;
+}
+/* line 11, ../scss/components/_events.scss */
+.event.Senior {
+  background: #00B398;
+}
 
-#time {
+/* line 1, ../scss/components/_clock.scss */
+#time-main {
   color: #0090DA;
   text-align: center;
-  margin: 0; }
-
-#clock {
+  margin: 0;
+}
+/* line 5, ../scss/components/_clock.scss */
+#time-main #clock {
   font-size: 75px;
-  padding-top: 10px; }
+  padding-top: 10px;
+}
+/* line 9, ../scss/components/_clock.scss */
+#time-main #minutes {
+  color: #00B398;
+}
 
-#minutes {
-  color: #00B398; }
+/* line 14, ../scss/components/_clock.scss */
+#time-room {
+  color: #000;
+  text-align: center;
+}
+/* line 17, ../scss/components/_clock.scss */
+#time-room #clock {
+  font-size: 100px;
+  padding-top: 10px;
+}
+/* line 21, ../scss/components/_clock.scss */
+#time-room #minutes {
+  color: #000;
+}
+/* line 24, ../scss/components/_clock.scss */
+#time-room .row {
+  margin: 0;
+}
 
+/* line 1, ../scss/components/_containers.scss */
 .col-md-4 {
   padding: 0;
-  background: black; }
+  background: black;
+}
 
+/* line 6, ../scss/components/_containers.scss */
 .schedule {
-  height: 100vh; }
+  height: 100vh;
+}
 
+/* line 1, ../scss/components/_rooms.scss */
 .room2 {
   margin: 0;
   padding: 0 10%;
-  position: relative; }
-  .room2.a {
-    color: black; }
+  position: relative;
+}
+/* line 2, ../scss/components/_rooms.scss */
+.room2.a {
+  color: black;
+}
 
+/* line 9, ../scss/components/_rooms.scss */
 .status {
   height: 35px;
   width: 35px;
@@ -42,38 +80,250 @@
   border-color: white;
   border-radius: 50%;
   position: absolute;
-  right: 10%; }
+  right: 10%;
+}
 
+/* line 19, ../scss/components/_rooms.scss */
 .room-name {
   color: #0090DA;
-  font-size: 35px; }
+  font-size: 35px;
+}
 
+/* line 24, ../scss/components/_rooms.scss */
 iframe {
   margin-top: 15px;
   width: 100%;
-  height: 250px; }
+  height: 250px;
+}
 
+/* line 1, ../scss/components/_background.scss */
 html {
-  background: black; }
-  html body {
-    font-family: 'Source Sans Pro'; }
+  background: black;
+}
+/* line 3, ../scss/components/_background.scss */
+html body {
+  font-family: 'Source Sans Pro';
+  background: black;
+}
 
+/* line 1, ../scss/components/_weather.scss */
 .info {
   color: white;
   font-size: 30px;
-  height: 20vh; }
+  height: 20vh;
+}
 
+/* line 6, ../scss/components/_weather.scss */
 .weather-container {
   margin: 0;
-  height: 20vh; }
+  height: 20vh;
+}
 
+/* line 10, ../scss/components/_weather.scss */
 #weather-image {
   padding: 0 10%;
   height: 100%;
-  width: auto; }
+  width: auto;
+}
 
+/* line 1, ../scss/components/_logo.scss */
 #logo {
   width: 80%;
-  padding: 15px 10% 0 10%; }
+  padding: 15px 10% 0 10%;
+}
 
-/*# sourceMappingURL=main.css.map */
+/* line 12, ../scss/components/_gooey-nav.scss */
+.menu {
+  filter: url("#shadowed-goo");
+}
+
+/* line 17, ../scss/components/_gooey-nav.scss */
+.menu-item, .menu-open-button {
+  background: #000;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  margin-left: -40px;
+  position: absolute;
+  top: 20px;
+  color: white;
+  text-align: center;
+  line-height: 80px;
+  transform: translate3d(0, 0, 0);
+  transition: transform ease-out 200ms;
+}
+
+/* line 31, ../scss/components/_gooey-nav.scss */
+.menu-open {
+  display: none;
+}
+
+/* line 37, ../scss/components/_gooey-nav.scss */
+.hamburger {
+  width: 25px;
+  height: 3px;
+  background: white;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12.5px;
+  margin-top: -1.5px;
+  transition: transform 200ms;
+}
+
+/* line 52, ../scss/components/_gooey-nav.scss */
+.hamburger-1 {
+  transform: translate3d(0, -8px, 0);
+}
+
+/* line 55, ../scss/components/_gooey-nav.scss */
+.hamburger-2 {
+  transform: translate3d(0, 0, 0);
+}
+
+/* line 58, ../scss/components/_gooey-nav.scss */
+.hamburger-3 {
+  transform: translate3d(0, 8px, 0);
+}
+
+/* line 62, ../scss/components/_gooey-nav.scss */
+.menu-open:checked + .menu-open-button .hamburger-1 {
+  transform: translate3d(0, 0, 0) rotate(45deg);
+}
+/* line 65, ../scss/components/_gooey-nav.scss */
+.menu-open:checked + .menu-open-button .hamburger-2 {
+  transform: translate3d(0, 0, 0) scale(0.1, 1);
+}
+/* line 68, ../scss/components/_gooey-nav.scss */
+.menu-open:checked + .menu-open-button .hamburger-3 {
+  transform: translate3d(0, 0, 0) rotate(-45deg);
+}
+
+/* line 72, ../scss/components/_gooey-nav.scss */
+.menu {
+  position: absolute;
+  left: 50%;
+  margin-left: -190px;
+  padding-top: 20px;
+  padding-left: 190px;
+  width: 380px;
+  height: 250px;
+  box-sizing: border-box;
+  font-size: 20px;
+  text-align: left;
+}
+
+/* line 90, ../scss/components/_gooey-nav.scss */
+.menu-item:hover {
+  background: white;
+  color: #000;
+}
+/* line 95, ../scss/components/_gooey-nav.scss */
+.menu-item:nth-child(3) {
+  transition-duration: 70ms;
+}
+/* line 95, ../scss/components/_gooey-nav.scss */
+.menu-item:nth-child(4) {
+  transition-duration: 130ms;
+}
+/* line 95, ../scss/components/_gooey-nav.scss */
+.menu-item:nth-child(5) {
+  transition-duration: 190ms;
+}
+/* line 95, ../scss/components/_gooey-nav.scss */
+.menu-item:nth-child(6) {
+  transition-duration: 250ms;
+}
+/* line 95, ../scss/components/_gooey-nav.scss */
+.menu-item:nth-child(7) {
+  transition-duration: 310ms;
+}
+
+/* line 101, ../scss/components/_gooey-nav.scss */
+.menu-open-button {
+  z-index: 2;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 400ms;
+  transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+  cursor: pointer;
+}
+
+/* line 109, ../scss/components/_gooey-nav.scss */
+.menu-open-button:hover {
+  transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+}
+
+/* line 112, ../scss/components/_gooey-nav.scss */
+.menu-open:checked + .menu-open-button {
+  transition-timing-function: linear;
+  transition-duration: 200ms;
+  transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+}
+
+/* line 118, ../scss/components/_gooey-nav.scss */
+.menu-open:checked ~ .menu-item {
+  transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
+}
+/* line 123, ../scss/components/_gooey-nav.scss */
+.menu-open:checked ~ .menu-item:nth-child(3) {
+  transition-duration: 160ms;
+  transform: translate3d(114.42548px, 11.48084px, 0);
+}
+/* line 123, ../scss/components/_gooey-nav.scss */
+.menu-open:checked ~ .menu-item:nth-child(4) {
+  transition-duration: 240ms;
+  transform: translate3d(77.18543px, 85.2491px, 0);
+}
+/* line 123, ../scss/components/_gooey-nav.scss */
+.menu-open:checked ~ .menu-item:nth-child(5) {
+  transition-duration: 320ms;
+  transform: translate3d(0.09158px, 114.99996px, 0);
+}
+/* line 123, ../scss/components/_gooey-nav.scss */
+.menu-open:checked ~ .menu-item:nth-child(6) {
+  transition-duration: 400ms;
+  transform: translate3d(-77.04956px, 85.37192px, 0);
+}
+/* line 123, ../scss/components/_gooey-nav.scss */
+.menu-open:checked ~ .menu-item:nth-child(7) {
+  transition-duration: 480ms;
+  transform: translate3d(-114.40705px, 11.66307px, 0);
+}
+
+/* line 1, ../scss/components/_room-schedule.scss */
+.room-title,
+.room-status {
+  color: white;
+  text-align: center;
+}
+
+/* line 7, ../scss/components/_room-schedule.scss */
+.room-title {
+  font-size: 120px;
+  text-transform: uppercase;
+}
+
+/* line 12, ../scss/components/_room-schedule.scss */
+.room-status {
+  font-size: 100px;
+}
+/* line 14, ../scss/components/_room-schedule.scss */
+.room-status #AvailableBusy {
+  text-transform: uppercase;
+  font-size: 100px;
+}
+/* line 18, ../scss/components/_room-schedule.scss */
+.room-status #at,
+.room-status #until {
+  font-size: 50px;
+}
+/* line 22, ../scss/components/_room-schedule.scss */
+.room-status #statusChangeTime {
+  font-size: 120px;
+}
+
+/* line 27, ../scss/components/_room-schedule.scss */
+.bumper {
+  height: 40px;
+}

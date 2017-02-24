@@ -3,31 +3,30 @@ import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 
-import { AppComponent } from './app.component'
-import { RoomsComponent } from './rooms.component'
-import { AuthPageComponent } from './auth-page.component'
-import { RoomScheduleComponent } from './room-schedule.component'
-import { JuniorScheduleComponent } from './junior-schedule.component'
-import { SeniorScheduleComponent } from './senior-schedule.component'
-import { HackerspaceComponent } from './hackerspace-component.component'
-
 import { routing } from './app.routing'
-import { ApiGuard } from './api.guard'
-import { HttpService } from './http.service'
-import { WeatherComponent } from './weather.component'
-import { ClockComponent } from './clock.component'
+
+import { RootComponent } from './components/root.component'
+import { RoomsComponent } from './components/rooms.component'
+import { RoomScheduleComponent } from './components/room-schedule.component'
+import { JuniorSeniorComponent } from './components/junior-senior.component'
+import { AppComponent } from './components/app.component'
+import { GooeyNavComponent } from './components/gooey-nav.component'
+import { WeatherComponent } from './components/weather.component'
+import { ClockComponent } from './components/clock.component'
+
+import { HttpService } from './shared/http.service'
+import { AuthService } from './shared/auth.service'
 
 @NgModule({
   declarations: [
-    AppComponent,
+    RootComponent,
     RoomsComponent,
-    AuthPageComponent,
     RoomScheduleComponent,
-    JuniorScheduleComponent,
-    SeniorScheduleComponent,
-    HackerspaceComponent,
+    JuniorSeniorComponent,
+    AppComponent,
     WeatherComponent,
-    ClockComponent
+    ClockComponent,
+    GooeyNavComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +34,7 @@ import { ClockComponent } from './clock.component'
     HttpModule,
     routing
   ],
-  providers: [HttpService, ApiGuard],
-  bootstrap: [AppComponent]
+  providers: [HttpService, AuthService],
+  bootstrap: [RootComponent]
 })
 export class AppModule { }

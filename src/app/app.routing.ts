@@ -1,9 +1,10 @@
 import { Routes, RouterModule, CanActivate } from '@angular/router'
-import { HackerspaceComponent } from './hackerspace-component.component'
-import { RoomScheduleComponent } from './room-schedule.component'
+
+import { RoomScheduleComponent } from './components/room-schedule.component'
+import { AppComponent } from './components/app.component'
 
 const APP_ROUTES: Routes = [
-    { path: '', component: HackerspaceComponent },
+    { path: '', component: AppComponent },
     { path: ':roomName', component: RoomScheduleComponent }
 ]
 

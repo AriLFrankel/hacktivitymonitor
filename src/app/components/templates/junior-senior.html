@@ -1,0 +1,5 @@
+<div *ngFor='let event of events'
+  [ngStyle]="{padding:event.padding, opacity:event.opacity, display:event.display}" 
+  class="{{juniorsenior}} event">
+  <span *ngIf="event.start">{{event.start}} </span> {{event.summary}}
+</div>

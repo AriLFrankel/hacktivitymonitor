@@ -1,0 +1,12 @@
+<div class="room-schedule" [style.background]="roomStatus">
+  <div class="room-title">{{roomName}}</div>
+  <hd-gooey-nav></hd-gooey-nav>
+  <div class="bumper"></div>
+  <hd-clock id="time-room"></hd-clock>
+  <div class="room-status">
+    <div *ngIf="roomStatus === 'green'" id="AvailableBusy">Available</div>
+    <div id="AvailableBusy" *ngIf="roomStatus === 'red' || roomStatus === 'yellow'">Busy</div>
+    <div id="until">until</div>
+    <div id="statusChangeTime">{{statusChangeTime}}</div>
+  </div>
+</div>
