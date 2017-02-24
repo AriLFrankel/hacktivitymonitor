@@ -66,7 +66,7 @@ export class HttpService {
         const start = moment(busyObj.start).toISOString()
         const end = moment(busyObj.end).toISOString()
         if (start <= thirtyFromNow && start >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(end).format('H:mm')} })
+          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start).format('H:mm')} })
         } else if (start <= currentTime && end >= currentTime) {
           this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end).format('H:mm')} })
         } else {
