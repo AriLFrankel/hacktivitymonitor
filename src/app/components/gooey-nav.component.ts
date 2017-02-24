@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core'
+import { Component, AfterViewInit} from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { HttpService } from '../shared/http.service'
 import { roomDictionary } from '../shared/room-dictionary'
@@ -26,8 +26,8 @@ export class GooeyNavComponent implements AfterViewInit {
   }
 
   ngAfterViewInit () {
-    $('.menu-item').on('click', (e) => {
-      console.log(this.roomId, e.target.id)
+    $('.menu-item, i').on('click', (e) => {
+      $('.menu-open').prop('checked', false)
       e.preventDefault()
       this.httpService.bookRoom(this.roomId, e.target.id)
     })

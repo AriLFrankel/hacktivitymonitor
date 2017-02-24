@@ -4,19 +4,11 @@ import { HttpService } from '../shared/http.service'
 import { AuthService } from '../shared/auth.service'
 import { roomDictionary } from '../shared/room-dictionary'
 
+declare const $: any
+
 @Component({
   selector: 'hd-room-schedule',
-  template: `
-  <div [style.background]="roomStatus">
-    <div class="room-title">{{ roomName }}</div>
-    <hd-gooey-nav></hd-gooey-nav>
-    <div>
-      <span *ngIf="roomStatus === 'red' || roomStatus === 'yellow'">Next available at</span>
-      <span *ngIf="roomStatus === 'green'">Available until</span>
-      {{ statusChangeTime }}
-    </div>
-  </div>
-  `,
+  templateUrl: './templates/room-schedule.html',
   providers: [HttpService, AuthService]
 })
 
@@ -42,9 +34,10 @@ export class RoomScheduleComponent implements OnDestroy {
 
     this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
-      console.log('busyStuff', roomBusy, roomDictionary[Object.keys(roomBusy)[0]])
+      // console.log('busyStuff', roomBusy, roomDictionary[Object.keys(roomBusy)[0]])
       this.roomStatus = roomBusy[this.roomId].color
       this.statusChangeTime = roomBusy[this.roomId].statusChangeTime
+      $('html').css("background", roomBusy[this.roomId].color)
       this.ref.detectChanges()
     })
 

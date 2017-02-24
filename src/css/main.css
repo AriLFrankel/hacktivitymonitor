@@ -16,21 +16,38 @@
 }
 
 /* line 1, ../scss/components/_clock.scss */
-#time {
+#time-main {
   color: #0090DA;
   text-align: center;
   margin: 0;
 }
-
-/* line 7, ../scss/components/_clock.scss */
-#clock {
+/* line 5, ../scss/components/_clock.scss */
+#time-main #clock {
   font-size: 75px;
   padding-top: 10px;
 }
-
-/* line 12, ../scss/components/_clock.scss */
-#minutes {
+/* line 9, ../scss/components/_clock.scss */
+#time-main #minutes {
   color: #00B398;
+}
+
+/* line 14, ../scss/components/_clock.scss */
+#time-room {
+  color: #000;
+  text-align: center;
+}
+/* line 17, ../scss/components/_clock.scss */
+#time-room #clock {
+  font-size: 100px;
+  padding-top: 10px;
+}
+/* line 21, ../scss/components/_clock.scss */
+#time-room #minutes {
+  color: #000;
+}
+/* line 24, ../scss/components/_clock.scss */
+#time-room .row {
+  margin: 0;
 }
 
 /* line 1, ../scss/components/_containers.scss */
@@ -115,14 +132,14 @@ html body {
   padding: 15px 10% 0 10%;
 }
 
-/* line 13, ../scss/components/_gooey-nav.scss */
+/* line 12, ../scss/components/_gooey-nav.scss */
 .menu {
   filter: url("#shadowed-goo");
 }
 
-/* line 18, ../scss/components/_gooey-nav.scss */
+/* line 17, ../scss/components/_gooey-nav.scss */
 .menu-item, .menu-open-button {
-  background: #ff4081;
+  background: #000;
   border-radius: 100%;
   width: 80px;
   height: 80px;
@@ -136,12 +153,12 @@ html body {
   transition: transform ease-out 200ms;
 }
 
-/* line 32, ../scss/components/_gooey-nav.scss */
+/* line 31, ../scss/components/_gooey-nav.scss */
 .menu-open {
   display: none;
 }
 
-/* line 38, ../scss/components/_gooey-nav.scss */
+/* line 37, ../scss/components/_gooey-nav.scss */
 .hamburger {
   width: 25px;
   height: 3px;
@@ -155,35 +172,35 @@ html body {
   transition: transform 200ms;
 }
 
-/* line 53, ../scss/components/_gooey-nav.scss */
+/* line 52, ../scss/components/_gooey-nav.scss */
 .hamburger-1 {
   transform: translate3d(0, -8px, 0);
 }
 
-/* line 56, ../scss/components/_gooey-nav.scss */
+/* line 55, ../scss/components/_gooey-nav.scss */
 .hamburger-2 {
   transform: translate3d(0, 0, 0);
 }
 
-/* line 59, ../scss/components/_gooey-nav.scss */
+/* line 58, ../scss/components/_gooey-nav.scss */
 .hamburger-3 {
   transform: translate3d(0, 8px, 0);
 }
 
-/* line 63, ../scss/components/_gooey-nav.scss */
+/* line 62, ../scss/components/_gooey-nav.scss */
 .menu-open:checked + .menu-open-button .hamburger-1 {
   transform: translate3d(0, 0, 0) rotate(45deg);
 }
-/* line 66, ../scss/components/_gooey-nav.scss */
+/* line 65, ../scss/components/_gooey-nav.scss */
 .menu-open:checked + .menu-open-button .hamburger-2 {
   transform: translate3d(0, 0, 0) scale(0.1, 1);
 }
-/* line 69, ../scss/components/_gooey-nav.scss */
+/* line 68, ../scss/components/_gooey-nav.scss */
 .menu-open:checked + .menu-open-button .hamburger-3 {
   transform: translate3d(0, 0, 0) rotate(-45deg);
 }
 
-/* line 73, ../scss/components/_gooey-nav.scss */
+/* line 72, ../scss/components/_gooey-nav.scss */
 .menu {
   position: absolute;
   left: 50%;
@@ -197,33 +214,33 @@ html body {
   text-align: left;
 }
 
-/* line 91, ../scss/components/_gooey-nav.scss */
+/* line 90, ../scss/components/_gooey-nav.scss */
 .menu-item:hover {
   background: white;
-  color: #ff4081;
+  color: #000;
 }
-/* line 96, ../scss/components/_gooey-nav.scss */
+/* line 95, ../scss/components/_gooey-nav.scss */
 .menu-item:nth-child(3) {
   transition-duration: 70ms;
 }
-/* line 96, ../scss/components/_gooey-nav.scss */
+/* line 95, ../scss/components/_gooey-nav.scss */
 .menu-item:nth-child(4) {
   transition-duration: 130ms;
 }
-/* line 96, ../scss/components/_gooey-nav.scss */
+/* line 95, ../scss/components/_gooey-nav.scss */
 .menu-item:nth-child(5) {
   transition-duration: 190ms;
 }
-/* line 96, ../scss/components/_gooey-nav.scss */
+/* line 95, ../scss/components/_gooey-nav.scss */
 .menu-item:nth-child(6) {
   transition-duration: 250ms;
 }
-/* line 96, ../scss/components/_gooey-nav.scss */
+/* line 95, ../scss/components/_gooey-nav.scss */
 .menu-item:nth-child(7) {
   transition-duration: 310ms;
 }
 
-/* line 102, ../scss/components/_gooey-nav.scss */
+/* line 101, ../scss/components/_gooey-nav.scss */
 .menu-open-button {
   z-index: 2;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -232,49 +249,81 @@ html body {
   cursor: pointer;
 }
 
-/* line 110, ../scss/components/_gooey-nav.scss */
+/* line 109, ../scss/components/_gooey-nav.scss */
 .menu-open-button:hover {
   transform: scale(1.2, 1.2) translate3d(0, 0, 0);
 }
 
-/* line 113, ../scss/components/_gooey-nav.scss */
+/* line 112, ../scss/components/_gooey-nav.scss */
 .menu-open:checked + .menu-open-button {
   transition-timing-function: linear;
   transition-duration: 200ms;
   transform: scale(0.8, 0.8) translate3d(0, 0, 0);
 }
 
-/* line 119, ../scss/components/_gooey-nav.scss */
+/* line 118, ../scss/components/_gooey-nav.scss */
 .menu-open:checked ~ .menu-item {
   transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
 }
-/* line 124, ../scss/components/_gooey-nav.scss */
+/* line 123, ../scss/components/_gooey-nav.scss */
 .menu-open:checked ~ .menu-item:nth-child(3) {
   transition-duration: 160ms;
   transform: translate3d(114.42548px, 11.48084px, 0);
 }
-/* line 124, ../scss/components/_gooey-nav.scss */
+/* line 123, ../scss/components/_gooey-nav.scss */
 .menu-open:checked ~ .menu-item:nth-child(4) {
   transition-duration: 240ms;
   transform: translate3d(77.18543px, 85.2491px, 0);
 }
-/* line 124, ../scss/components/_gooey-nav.scss */
+/* line 123, ../scss/components/_gooey-nav.scss */
 .menu-open:checked ~ .menu-item:nth-child(5) {
   transition-duration: 320ms;
   transform: translate3d(0.09158px, 114.99996px, 0);
 }
-/* line 124, ../scss/components/_gooey-nav.scss */
+/* line 123, ../scss/components/_gooey-nav.scss */
 .menu-open:checked ~ .menu-item:nth-child(6) {
   transition-duration: 400ms;
   transform: translate3d(-77.04956px, 85.37192px, 0);
 }
-/* line 124, ../scss/components/_gooey-nav.scss */
+/* line 123, ../scss/components/_gooey-nav.scss */
 .menu-open:checked ~ .menu-item:nth-child(7) {
   transition-duration: 480ms;
   transform: translate3d(-114.40705px, 11.66307px, 0);
 }
 
 /* line 1, ../scss/components/_room-schedule.scss */
-hd-room-schedule {
-  height: 100vh;
+.room-title,
+.room-status {
+  color: white;
+  text-align: center;
+}
+
+/* line 7, ../scss/components/_room-schedule.scss */
+.room-title {
+  font-size: 120px;
+  text-transform: uppercase;
+}
+
+/* line 12, ../scss/components/_room-schedule.scss */
+.room-status {
+  font-size: 100px;
+}
+/* line 14, ../scss/components/_room-schedule.scss */
+.room-status #Available {
+  text-transform: uppercase;
+  font-size: 100px;
+}
+/* line 18, ../scss/components/_room-schedule.scss */
+.room-status #at,
+.room-status #until {
+  font-size: 50px;
+}
+/* line 22, ../scss/components/_room-schedule.scss */
+.room-status #statusChangeTime {
+  font-size: 120px;
+}
+
+/* line 27, ../scss/components/_room-schedule.scss */
+.bumper {
+  height: 40px;
 }

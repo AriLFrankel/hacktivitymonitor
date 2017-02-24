@@ -44,7 +44,7 @@ export class HttpService {
   }
 
   getStatus(roomId: string) {
-    console.log(roomId, roomDictionary[roomId])
+    // console.log(roomId, roomDictionary[roomId])
     const currentTime = moment().toISOString(),
     thirtyFromNow = moment().add(.5, 'h').toISOString(),
     addHours = this.addHours
@@ -60,8 +60,7 @@ export class HttpService {
     })
     .execute( (response: any) => {
       const events = response.result.calendars[roomId].busy
-      events.sort( (a, b) => moment(a).isBefore(b) ? -1 : 1)
-      // console.log(roomId, roomDictionary[roomId], response.result.calendars[roomId].busy.sort( (a,b) => moment(a).isBefore(b) ? -1 : 1) )
+      events.sort( (a, b) => moment(a.start).isBefore(b.start) ? 1 : -1)
       events
       .forEach((busyObj) => {
         const start = moment(busyObj.start).toISOString()
@@ -126,9 +125,6 @@ export class HttpService {
           {'method': 'email', 'minutes': 24 * 60},
           {'method': 'popup', 'minutes': 10}
         ]
-      },
-      'where': {
-
       }
     }
 

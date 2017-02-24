@@ -1,3 +1,29 @@
-hd-room-schedule {
-  height: 100vh
+.room-title,
+.room-status{
+  color: white;
+  text-align: center;
+}
+
+.room-title{
+  font-size: 120px;
+  text-transform: uppercase;
+}
+
+.room-status{
+  font-size: 100px;
+  #Available{
+    text-transform: uppercase;  
+    font-size: 100px;
+  }
+  #at,
+  #until{
+    font-size: 50px;
+  }
+  #statusChangeTime{
+    font-size:120px;
+  }
+}
+
+.bumper{
+  height: 40px;
 }
