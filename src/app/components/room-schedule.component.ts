@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { HttpService } from '../shared/http.service'
 import { AuthService } from '../shared/auth.service'
 import { roomDictionary } from '../shared/room-dictionary'
+// import * as io from 'socket.io-client';
 
 declare const $: any
 
@@ -19,6 +20,8 @@ export class RoomScheduleComponent implements OnDestroy {
   private roomId: string
   public roomName: string
   public statusChangeTime: string
+  private socket: any
+  private io: any
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -43,6 +46,7 @@ export class RoomScheduleComponent implements OnDestroy {
 
     this.httpService.getStatus(this.roomId)
     setInterval(() => {this.httpService.getStatus(this.roomId)}, 3000)
+    // setTimeout( ()=> {this.socket = io(); this.socket.emit('butts', {text: 'butts'})}, 2400 )
   }
 
   ngOnDestroy() {
