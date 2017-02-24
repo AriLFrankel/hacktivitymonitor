@@ -1,5 +1,5 @@
 export const roomDictionary = {
-  'hackreactor.com_2d373931333934353637@resource.calendar.google.com': 'Djikstra',
+  'hackreactor.com_2d373931333934353637@resource.calendar.google.com': 'Dijkstra',
   'hackreactor.com_32333137383234383439@resource.calendar.google.com': 'Hopper',
   'hackreactor.com_38343938353038373437@resource.calendar.google.com': 'Ellis',
   'hackreactor.com_3538363731393438383137@resource.calendar.google.com': 'Lecture Hall',
@@ -10,7 +10,7 @@ export const roomDictionary = {
   'hackreactor.com_3836363230383730323630@resource.calendar.google.com': 'Hamilton',
   'hackreactor.com_2d3433363932323136393534@resource.calendar.google.com': 'Junior Open Classroom',
   'hackreactor.com_2d3231313833303133383036@resource.calendar.google.com': 'Senior Open Classroom',
-  'Djikstra': 'hackreactor.com_2d373931333934353637@resource.calendar.google.com',
+  'Dijkstra': 'hackreactor.com_2d373931333934353637@resource.calendar.google.com',
   'Hopper': 'hackreactor.com_32333137383234383439@resource.calendar.google.com',
   'Lecture Hall': 'hackreactor.com_3538363731393438383137@resource.calendar.google.com',
   'Lovelace': 'hackreactor.com_3136303231303936383132@resource.calendar.google.com',

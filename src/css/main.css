@@ -273,3 +273,8 @@ html body {
   transition-duration: 480ms;
   transform: translate3d(-114.40705px, 11.66307px, 0);
 }
+
+/* line 1, ../scss/components/_room-schedule.scss */
+hd-room-schedule {
+  height: 100vh;
+}

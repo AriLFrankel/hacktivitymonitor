@@ -28,7 +28,7 @@ export class RoomsComponent implements OnDestroy {
         if (roomBusy.hasOwnProperty(roomBusyKey)) {
           for (const roomKey in this.rooms) {
             if (this.rooms.hasOwnProperty(roomKey) && this.rooms[roomKey].id === roomBusyKey) {
-              this.rooms[roomKey].busy = roomBusy[roomBusyKey]
+              this.rooms[roomKey].busy = roomBusy[roomBusyKey].color
               this.ref.detectChanges()
             }
           }
@@ -44,12 +44,12 @@ export class RoomsComponent implements OnDestroy {
 
   getRooms() {
     this.httpService.getRooms([
-        roomDictionary.Hamilton,
         roomDictionary.Ellis,
         roomDictionary.Lovelace,
         roomDictionary.Hopper,
         roomDictionary.Turing,
-        roomDictionary.Djikstra
+        roomDictionary.Dijkstra,
+        roomDictionary['Lecture Hall']
       ])
     .then( (roomsArr) => {
       for (const roomKey in roomsArr) {
