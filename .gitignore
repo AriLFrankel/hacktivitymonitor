@@ -42,5 +42,4 @@ Thumbs.db
 /src/bower_components
 
 # sass
-src/.sass-cache
-src/.sass-cache
+/.sass-cache
