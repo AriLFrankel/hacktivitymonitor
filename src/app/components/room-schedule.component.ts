@@ -40,7 +40,7 @@ export class RoomScheduleComponent implements OnDestroy {
       // console.log('busyStuff', roomBusy, roomDictionary[Object.keys(roomBusy)[0]])
       this.roomStatus = roomBusy[this.roomId].color
       this.statusChangeTime = roomBusy[this.roomId].statusChangeTime
-      $('html').css("background", roomBusy[this.roomId].color)
+      $('html').css('background', roomBusy[this.roomId].color)
       this.ref.detectChanges()
     })
 

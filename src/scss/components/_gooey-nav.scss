@@ -1,7 +1,7 @@
 @import "compass/css3";
 
 //vars
-$fg:#000;
+$fg:rgba(255,255,255,0.4);
 $pi:3.14;
 
 //config
@@ -9,11 +9,6 @@ $menu-items:5;
 $open-distance:115px;
 $opening-angle:$pi - .2;
 
-%goo{
-  filter:url('#shadowed-goo');
-  // debug 
-  // background:rgba(255,0,0,0.2);
-}
 %ball{
   background:$fg;
   border-radius:100%;
@@ -22,7 +17,7 @@ $opening-angle:$pi - .2;
   margin-left:-40px;
   position:absolute;
   top:20px;
-  color:white;
+  color:#000;
   text-align:center;
   line-height:80px;
   transform:translate3d(0,0,0);
@@ -34,43 +29,8 @@ $opening-angle:$pi - .2;
 .menu-item{
   @extend %ball;
 }
-.hamburger{
-  $width:25px;
-  $height:3px;
-  width:$width;
-  height:$height;
-  background:white;
-  display:block;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-left:-$width/2;
-  margin-top:-$height/2;
-  transition:transform 200ms;
-}
-$hamburger-spacing:8px;
-.hamburger-1{
-  transform:translate3d(0,-$hamburger-spacing,0);
-}
-.hamburger-2{
-  transform:translate3d(0,0,0);
-}
-.hamburger-3{
-  transform:translate3d(0,$hamburger-spacing,0);
-}
-.menu-open:checked+.menu-open-button{
-  .hamburger-1{
-    transform:translate3d(0,0,0) rotate(45deg); 
-  }
-  .hamburger-2{
-    transform:translate3d(0,0,0) scale(0.1,1);
-  }
-  .hamburger-3{
-    transform:translate3d(0,0,0) rotate(-45deg); 
-  }
-}
+
 .menu{
-  @extend %goo;
   $width:380px;
   $height:250px;
   position:absolute;
@@ -87,9 +47,12 @@ $hamburger-spacing:8px;
 
 
 .menu-item{
-  &:hover{
-    background:white;
-    color:$fg;
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited{
+    color:black;
+    text-decoration: none;
   }
   @for $i from 1 through $menu-items{
     &:nth-child(#{$i+2}){
@@ -101,6 +64,7 @@ $hamburger-spacing:8px;
 .menu-open-button{
   @extend %ball;
   z-index:2;
+  background:rgba(255,255,255,1);
   transition-timing-function:cubic-bezier(0.175, 0.885, 0.320, 1.275);
   transition-duration:400ms;
   transform:scale(1.1,1.1) translate3d(0,0,0);
