@@ -42,6 +42,12 @@ export class RoomScheduleComponent implements OnDestroy {
       this.statusChangeTime = roomBusy[this.roomId].statusChangeTime
       $('html').css('background', roomBusy[this.roomId].color)
       this.ref.detectChanges()
+      console.log(this.roomStatus, ' : roomStatus')
+      if(this.roomStatus === 'red'){
+        $('hd-gooey-nav').css('visibility', 'hidden')
+      } else {
+        $('hd-gooey-nav').css('visibility', 'visible')
+      }
     })
 
     this.httpService.getStatus(this.roomId)
