@@ -16,6 +16,7 @@ import { ClockComponent } from './components/clock.component'
 
 import { HttpService } from './shared/http.service'
 import { AuthService } from './shared/auth.service'
+import { CheckmarkComponent } from './components/checkmark.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthService } from './shared/auth.service'
     AppComponent,
     WeatherComponent,
     ClockComponent,
-    GooeyNavComponent
+    GooeyNavComponent,
+    CheckmarkComponent
   ],
   imports: [
     BrowserModule,

@@ -37,17 +37,19 @@ export class RoomScheduleComponent implements OnDestroy {
 
     this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
-      // console.log('busyStuff', roomBusy, roomDictionary[Object.keys(roomBusy)[0]])
+      console.log('busyStuff', roomBusy, roomDictionary[Object.keys(roomBusy)[0]])
       this.roomStatus = roomBusy[this.roomId].color
       this.statusChangeTime = roomBusy[this.roomId].statusChangeTime
       $('html').css('background', roomBusy[this.roomId].color)
-      this.ref.detectChanges()
       console.log(this.roomStatus, ' : roomStatus')
-      if(this.roomStatus === 'red'){
-        $('hd-gooey-nav').css('visibility', 'hidden')
+      if (this.roomStatus === 'red' || this.roomStatus === 'yellow') {
+        $('hd-gooey-nav').css({display: 'block', visibility: 'hidden'})
       } else {
-        $('hd-gooey-nav').css('visibility', 'visible')
+        $('hd-checkmark').css('display', 'none')
+        $('hd-gooey-nav').css({display: 'block', visibility: 'visible'})
+
       }
+      this.ref.detectChanges()
     })
 
     this.httpService.getStatus(this.roomId)

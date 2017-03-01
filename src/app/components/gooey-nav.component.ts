@@ -4,6 +4,7 @@ import { HttpService } from '../shared/http.service'
 import { roomDictionary } from '../shared/room-dictionary'
 
 declare const $: any
+declare const moment: any
 
 @Component({
   selector: 'hd-gooey-nav',
@@ -28,8 +29,11 @@ export class GooeyNavComponent implements AfterViewInit {
   ngAfterViewInit () {
     $('.menu-item, i').on('click', (e) => {
       $('.menu-open').prop('checked', false)
+      $('hd-checkmark').css('display', 'block')
+      $('hd-gooey-nav').css('display', 'none')
       e.preventDefault()
       this.httpService.bookRoom(this.roomId, e.target.id)
+      this.httpService.statusEvent.emit({[this.roomId]: {color: 'red', statusChangeTime: moment().add(e.target.id, 'h')} })
     })
   }
 }
