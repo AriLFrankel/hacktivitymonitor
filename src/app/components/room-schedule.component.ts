@@ -44,10 +44,9 @@ export class RoomScheduleComponent implements OnDestroy {
       console.log(this.roomStatus, ' : roomStatus')
       if (this.roomStatus === 'red' || this.roomStatus === 'yellow') {
         $('hd-gooey-nav').css({display: 'block', visibility: 'hidden'})
+        $('hd-checkmark').css({display: 'none'})
       } else {
-        $('hd-checkmark').css('display', 'none')
-        $('hd-gooey-nav').css({display: 'block', visibility: 'visible'})
-
+        // $('hd-gooey-nav').css({display: 'block', visibility: 'visible'})
       }
       this.ref.detectChanges()
     })

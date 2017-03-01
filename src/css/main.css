@@ -287,25 +287,35 @@ html body {
   width: 200px;
   margin: 0 auto;
   padding-top: 40px;
+  animation: dash 1s ease-in-out;
+  animation: dash 2s ease-out;
+  -webkit-animation: dash 1s ease-in-out;
+  -webkit-animation: dash 2s ease-out;
 }
 
-/* line 7, ../scss/components/_checkmark.scss */
+/* line 11, ../scss/components/_checkmark.scss */
 .path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 0;
   animation: dash 1s ease-in-out;
+  animation: dash 1s ease-in-out;
   -webkit-animation: dash 1s ease-in-out;
+  -webkit-animation: dash 2s ease-out;
 }
 
-/* line 14, ../scss/components/_checkmark.scss */
+/* line 20, ../scss/components/_checkmark.scss */
 .spin {
   animation: spin 1s;
   -webkit-animation: spin 1s;
   transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
+  animation: dash 1s ease-in-out;
+  animation: dash 1s ease-in-out;
+  -webkit-animation: dash 1s ease-in-out;
+  -webkit-animation: dash 2s ease-out;
 }
 
-/* line 21, ../scss/components/_checkmark.scss */
+/* line 31, ../scss/components/_checkmark.scss */
 p {
   font-family: sans-serif;
   color: black;
@@ -315,6 +325,10 @@ p {
   text-align: center;
   animation: text .5s linear .4s;
   -webkit-animation: text .4s linear .3s;
+  animation: dash 1s ease-in-out;
+  -webkit-animation: dash 1s ease-in-out;
+  animation: dash 2s ease-out;
+  -webkit-animation: dash 2s ease-out;
 }
 
 @-webkit-keyframes dash {
