@@ -29,33 +29,39 @@ export class RoomScheduleComponent implements OnDestroy {
               private authService: AuthService,
               private ref: ChangeDetectorRef
              ) {
+    // get room name from route and roomId from roomDictionary
     this.routeSubscription = this.route.params.subscribe(
     (params: any) => {
       this.roomId = roomDictionary[params['roomName']]
       this.roomName = params['roomName']
     })
 
+    // listen for 'status' events
     this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
-      console.log('busyStuff', roomBusy, roomDictionary[Object.keys(roomBusy)[0]])
+      // update roomstatus
       this.roomStatus = roomBusy[this.roomId].color
+      // update statusChangeTime to display when room is available / busy
       this.statusChangeTime = roomBusy[this.roomId].statusChangeTime
       $('html').css('background', roomBusy[this.roomId].color)
-      console.log(this.roomStatus, ' : roomStatus')
       if (this.roomStatus === 'red' || this.roomStatus === 'yellow') {
+        // rm gooey nav and checkmark from view
         $('hd-gooey-nav').css({display: 'block', visibility: 'hidden'})
-        $('hd-checkmark').css({display: 'none'})
+        $('hd-checkmark').css('display', 'none')
       } else {
-        // $('hd-gooey-nav').css({display: 'block', visibility: 'visible'})
+        $('hd-gooey-nav').css('visibility', 'visible')
       }
+      // trigger a rerender
       this.ref.detectChanges()
     })
 
+    // get the room's status, which will emit status events
+    // set an interval to get room status every 3 seconds
     this.httpService.getStatus(this.roomId)
     setInterval(() => {this.httpService.getStatus(this.roomId)}, 3000)
-    // setTimeout( ()=> {this.socket = io(); this.socket.emit('butts', {text: 'butts'})}, 2400 )
   }
 
+  // avoid memory leaks by unsubscribing on destroy
   ngOnDestroy() {
     this.routeSubscription.unsubscribe()
     this.statusSubscription.unsubscribe()

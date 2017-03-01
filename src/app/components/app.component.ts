@@ -5,7 +5,7 @@ import { Component } from '@angular/core'
   template: `
     <div class="row">
       <hd-weather class="col-md-4"></hd-weather>
-      <div class="col-md-4"><img id='logo' src='./Final.png'></div>
+      <div class="col-md-4"><img id='logo' src='./hacktivityLogo.png'></div>
       <hd-clock class="col-md-4" id="time-main"></hd-clock>
     </div>
     <div class="row">

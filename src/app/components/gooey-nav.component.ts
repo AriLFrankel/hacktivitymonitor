@@ -20,19 +20,23 @@ export class GooeyNavComponent implements AfterViewInit {
     private httpService: HttpService,
     private route: ActivatedRoute
     ) {
+    // get room name from route
     this.routeSubscription = this.route.params.subscribe(
-    (params: any) => {
+    (params) => {
       this.roomId = roomDictionary[params['roomName']]
     })
   }
 
   ngAfterViewInit () {
+    // each menu item's id attribute is a fraction (of an hour)
     $('.menu-item, i').on('click', (e) => {
-      $('.menu-open').prop('checked', false)
+      // show the checkmark and hide the nav
       $('hd-checkmark').css('display', 'block')
       $('hd-gooey-nav').css('display', 'none')
       e.preventDefault()
+      // insert the event on google calendar
       this.httpService.bookRoom(this.roomId, e.target.id)
+      // fire a status event to update local view
       this.httpService.statusEvent.emit({[this.roomId]: {color: 'red', statusChangeTime: moment().add(e.target.id, 'h')} })
     })
   }

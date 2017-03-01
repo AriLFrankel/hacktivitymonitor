@@ -9,11 +9,14 @@ declare const httpService: any
 @Injectable()
 
 export class HttpService {
+  // an emitter for updating rooms' statuses
   @Output()
   statusEvent: EventEmitter<any> = new EventEmitter()
 
   /* get */
-  getRooms(rooms: string[]) {
+  // retrieve room data from gcal
+  // return a promise containing an array of rooms with details
+  getRooms(rooms: string[]): any {
     return Promise.all(rooms.map((room) => {
       return gapi.client.calendar.calendars.get({
         'calendarId': room
@@ -27,7 +30,9 @@ export class HttpService {
     })
   }
 
-  getEvents(room: string) {
+  // get the events within a 24 hour period for a specific room
+  // return a promise that resolves with an array containing those events
+  getEvents(room: string): any {
     const todayMin = new Date(new Date().toString().split(' ').slice(0, 4).concat(['00:01:00']).join(' ')).toISOString()
     const todayMax = new Date(new Date().toString().split(' ').slice(0, 4).concat(['23:59:59']).join(' ')).toISOString()
     return gapi.client.calendar.events.list({
@@ -43,14 +48,14 @@ export class HttpService {
     })
   }
 
-  getStatus(roomId: string) {
-    // console.log(roomId, roomDictionary[roomId])
+  // query an individual calendar
+  getStatus(roomId: string): void {
     const currentTime = moment().toISOString(),
     thirtyFromNow = moment().add(.5, 'h').toISOString(),
     addHours = this.addHours
     gapi.client.calendar.freebusy.query({
-      'timeMin': (new Date()).toISOString(),
-      'timeMax': addHours.call(new Date(), 8),
+      'timeMin': moment().toISOString(),
+      'timeMax': moment().add(9, 'h').toISOString(),
       'timeZone': 'America/Chicago',
       'items': [
         {
@@ -59,6 +64,7 @@ export class HttpService {
       ]
     })
     .execute( (response: any) => {
+      // loop through events and emit statuses
       const events = response.result.calendars[roomId].busy
       events.sort( (a, b) => moment(a.start).isBefore(b.start) ? 1 : -1)
       events
@@ -79,7 +85,8 @@ export class HttpService {
     })
   }
 
-  getSchedule(roomId: string) {
+  // return a promise resolvign with an array of events for a particular room
+  getSchedule(roomId: string): any {
     return this.getEvents(roomId)
     .then( (events: any[]) => {
       return [].concat(events.map( (event: any) => {
@@ -103,8 +110,8 @@ export class HttpService {
   }
 
   /* post */
-  bookRoom (roomId: string, length: number) {
-    const event = {
+  bookRoom (roomId: string, length: number): void {
+    const event: any = {
       'summary': 'Last Minute Booking',
       'location': ' 800 Brazos Street, Austin, TX 78701',
       'description': 'last minute room booking',
@@ -139,11 +146,12 @@ export class HttpService {
   }
 
   /* helpers */
-  addHours = function(h) {
+  addHours = function(h): any {
     this.setHours(this.getHours() + h)
     return this
   }
-
+  
+  // is an event happening right now?
   isHappening(start, end, currTime): boolean {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
@@ -152,6 +160,7 @@ export class HttpService {
     (endHour > currHour || endHour === currHour && endMinute > currMinute)
   }
 
+  // is an event happening within two hours from now
   isRelevant(start, end, currTime): boolean {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
     endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),

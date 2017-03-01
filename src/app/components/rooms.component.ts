@@ -20,6 +20,7 @@ declare const $: any
 export class RoomsComponent implements OnDestroy {
   rooms: any[] = []
   statusSubscription: any
+  // set up a subscription to listen for service events
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
     this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
@@ -35,6 +36,9 @@ export class RoomsComponent implements OnDestroy {
         }
       }
     })
+    // get the rooms
+    // get the statuses for the rooms
+    // set an interval to get the statuses
     const getStatuses = this.getStatuses.bind( this)
     const getRooms = this.getRooms.bind( this)
     setTimeout(getRooms, 1200)
@@ -42,6 +46,8 @@ export class RoomsComponent implements OnDestroy {
     setInterval(getStatuses, 60000)
   }
 
+  // populate component's room's array
+  // give the room a default status of green
   getRooms() {
     this.httpService.getRooms([
         roomDictionary.Ellis,
@@ -62,13 +68,13 @@ export class RoomsComponent implements OnDestroy {
       this.ref.detectChanges()
     })
   }
-
+  // get the status of each room, which fires status events
   getStatuses() {
     this.rooms.forEach( (room: any) => {
       this.httpService.getStatus(room.id)
     })
   }
-
+  // avoid memory leaks by unsubscribing on destroy
   ngOnDestroy() {
     this.statusSubscription.unsubscribe()
   }

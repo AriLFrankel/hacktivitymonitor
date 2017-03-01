@@ -12,7 +12,9 @@ declare const $: any
 export class WeatherComponent implements OnInit {
 
   ngOnInit() {
+    // get the weather
     this.loadWeather()
+    // refresh the weather once an hour
     setInterval(this.loadWeather.bind(this), 600000)
   }
 

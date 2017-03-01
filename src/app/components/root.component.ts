@@ -12,6 +12,7 @@ import { AuthService } from '../shared/auth.service'
 export class RootComponent {
 
   constructor(private authService: AuthService) {
+    // TODO: find an alternative to timing out the sign in call until after async GAPI load
     setTimeout(this.signIn.bind(this), 1200)
   }
 

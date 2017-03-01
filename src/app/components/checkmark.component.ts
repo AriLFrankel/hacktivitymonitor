@@ -4,11 +4,8 @@ import { Component, OnInit } from '@angular/core'
   selector: 'hd-checkmark',
   templateUrl: './templates/checkmark.html'
 })
-export class CheckmarkComponent implements OnInit {
+export class CheckmarkComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
