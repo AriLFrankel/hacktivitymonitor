@@ -246,14 +246,14 @@ html body {
 }
 
 /* line 1, ../scss/components/_room-schedule.scss */
-.room-title,
 .room-status {
   color: white;
   text-align: center;
 }
 
-/* line 7, ../scss/components/_room-schedule.scss */
+/* line 6, ../scss/components/_room-schedule.scss */
 .room-title {
+  text-align: center;
   margin-top: 15px;
   width: 100%;
   font-size: 120px;

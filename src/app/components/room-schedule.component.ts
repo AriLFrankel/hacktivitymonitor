@@ -22,6 +22,7 @@ export class RoomScheduleComponent implements OnDestroy {
   public roomName: string
   public bannerColor: string
   public statusChangeTime: string
+  public titleColor: string
   // private socket: any
   // private io: any
 
@@ -37,6 +38,7 @@ export class RoomScheduleComponent implements OnDestroy {
       this.roomId = roomDictionary[params['roomName']]
       this.roomName = params['roomName']
       this.bannerColor = bannerDictionary[params['roomName']]
+      this.titleColor = this.roomName === 'Lovelace' ? '#000' : '#FFF'
     })
 
     // listen for 'status' events
