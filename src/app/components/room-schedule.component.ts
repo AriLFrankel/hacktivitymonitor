@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { HttpService } from '../shared/http.service'
 import { AuthService } from '../shared/auth.service'
 import { roomDictionary } from '../shared/room-dictionary'
+import { bannerDictionary } from '../shared/banner-dictionary'
 // import * as io from 'socket.io-client';
 
 declare const $: any
@@ -19,9 +20,10 @@ export class RoomScheduleComponent implements OnDestroy {
   public roomStatus: string
   private roomId: string
   public roomName: string
+  public bannerColor: string
   public statusChangeTime: string
-  private socket: any
-  private io: any
+  // private socket: any
+  // private io: any
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -34,6 +36,7 @@ export class RoomScheduleComponent implements OnDestroy {
     (params: any) => {
       this.roomId = roomDictionary[params['roomName']]
       this.roomName = params['roomName']
+      this.bannerColor = bannerDictionary[params['roomName']]
     })
 
     // listen for 'status' events

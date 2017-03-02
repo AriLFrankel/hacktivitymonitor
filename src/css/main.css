@@ -254,30 +254,32 @@ html body {
 
 /* line 7, ../scss/components/_room-schedule.scss */
 .room-title {
+  margin-top: 15px;
+  width: 100%;
   font-size: 120px;
   text-transform: uppercase;
 }
 
-/* line 12, ../scss/components/_room-schedule.scss */
+/* line 14, ../scss/components/_room-schedule.scss */
 .room-status {
   font-size: 100px;
 }
-/* line 14, ../scss/components/_room-schedule.scss */
+/* line 16, ../scss/components/_room-schedule.scss */
 .room-status #AvailableBusy {
   text-transform: uppercase;
   font-size: 100px;
 }
-/* line 18, ../scss/components/_room-schedule.scss */
+/* line 20, ../scss/components/_room-schedule.scss */
 .room-status #at,
 .room-status #until {
   font-size: 50px;
 }
-/* line 22, ../scss/components/_room-schedule.scss */
+/* line 24, ../scss/components/_room-schedule.scss */
 .room-status #statusChangeTime {
   font-size: 120px;
 }
 
-/* line 27, ../scss/components/_room-schedule.scss */
+/* line 29, ../scss/components/_room-schedule.scss */
 .bumper {
   height: 40px;
 }

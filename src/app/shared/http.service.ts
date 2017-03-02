@@ -150,7 +150,7 @@ export class HttpService {
     this.setHours(this.getHours() + h)
     return this
   }
-  
+
   // is an event happening right now?
   isHappening(start, end, currTime): boolean {
     const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
