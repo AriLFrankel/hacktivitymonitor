@@ -31,6 +31,7 @@ export class GooeyNavComponent implements AfterViewInit {
     // each menu item's id attribute is a fraction (of an hour)
     $('.menu-item, i').on('click', (e) => {
       // show the checkmark and hide the nav
+      $('.menu-open').prop('checked', false)
       $('hd-checkmark').css('display', 'block')
       $('hd-gooey-nav').css('display', 'none')
       e.preventDefault()
