@@ -51,8 +51,7 @@ export class HttpService {
   // query an individual calendar
   getStatus(roomId: string): void {
     const currentTime = moment().toISOString(),
-    thirtyFromNow = moment().add(.5, 'h').toISOString(),
-    addHours = this.addHours
+    thirtyFromNow = moment().add(.5, 'h').toISOString()
     gapi.client.calendar.freebusy.query({
       'timeMin': moment().toISOString(),
       'timeMax': moment().add(9, 'h').toISOString(),
@@ -145,11 +144,7 @@ export class HttpService {
     })
   }
 
-  /* helpers */
-  addHours = function(h): any {
-    this.setHours(this.getHours() + h)
-    return this
-  }
+  /*helpers*/
 
   // is an event happening right now?
   isHappening(start, end, currTime): boolean {
