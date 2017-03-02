@@ -7,6 +7,9 @@ const path = require('path')
 app.use(express.static(__dirname + '/dist'));
 app.use(express.static(__dirname + '/src'));
 
+app.get('/*', (req, res)=>{
+  res.redirect('/')
+})
 // io.on('connection', function(socket){
 //   console.log('connection')
 //   socket.on('butts', function(butts){
