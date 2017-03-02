@@ -246,40 +246,44 @@ html body {
 }
 
 /* line 1, ../scss/components/_room-schedule.scss */
-.room-status {
-  color: white;
-  text-align: center;
+.room-schedule {
+  color: #000;
+  padding-top: 15px;
 }
 
 /* line 6, ../scss/components/_room-schedule.scss */
+.room-status {
+  text-align: center;
+}
+
+/* line 10, ../scss/components/_room-schedule.scss */
 .room-title {
   text-align: center;
-  margin-top: 15px;
   width: 100%;
   font-size: 120px;
   text-transform: uppercase;
 }
 
-/* line 14, ../scss/components/_room-schedule.scss */
+/* line 17, ../scss/components/_room-schedule.scss */
 .room-status {
   font-size: 100px;
 }
-/* line 16, ../scss/components/_room-schedule.scss */
+/* line 19, ../scss/components/_room-schedule.scss */
 .room-status #AvailableBusy {
   text-transform: uppercase;
   font-size: 100px;
 }
-/* line 20, ../scss/components/_room-schedule.scss */
+/* line 23, ../scss/components/_room-schedule.scss */
 .room-status #at,
 .room-status #until {
   font-size: 50px;
 }
-/* line 24, ../scss/components/_room-schedule.scss */
+/* line 27, ../scss/components/_room-schedule.scss */
 .room-status #statusChangeTime {
   font-size: 120px;
 }
 
-/* line 29, ../scss/components/_room-schedule.scss */
+/* line 32, ../scss/components/_room-schedule.scss */
 .bumper {
   height: 40px;
 }

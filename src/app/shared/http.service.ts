@@ -71,11 +71,11 @@ export class HttpService {
         const start = moment(busyObj.start).toISOString()
         const end = moment(busyObj.end).toISOString()
         if (start <= thirtyFromNow && start >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start).format('H:mm')} })
+          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start)} })
         } else if (start <= currentTime && end >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end).format('H:mm')} })
+          this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end)} })
         } else {
-          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start).format('H:mm')} })
+          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start)} })
         }
       })
       if (response.result.calendars[roomId].busy.length === 0) {

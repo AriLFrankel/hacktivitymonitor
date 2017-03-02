@@ -1,14 +1,14 @@
 <div class="room-schedule" [style.background]="roomStatus">
-  <div class="room-title" [style.background]="bannerColor" [style.color]="titleColor">{{roomName}}</div>
+  <div class="room-title" [style.background]="bannerColor" >{{roomName}}</div>
   <hd-gooey-nav></hd-gooey-nav>
   <hd-checkmark style="display:none"></hd-checkmark>
   <div class="bumper"></div>
   <hd-clock id="time-room"></hd-clock>
   <div class="room-status">
     <div *ngIf="roomStatus === 'green' || roomStatus === 'yellow'"
-    id="AvailableBusy">Available</div>
+    id="AvailableBusy" [style.color]="titleColor">Available</div>
     <div id="AvailableBusy" *ngIf="roomStatus === 'red'">Busy</div>
     <div id="until">until</div>
-    <div id="statusChangeTime">{{statusChangeTime}}</div>
+    <div id="statusChangeTime">{{statusChangeTimeBanner}}</div>
   </div>
 </div>
