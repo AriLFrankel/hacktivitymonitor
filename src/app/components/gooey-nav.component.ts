@@ -37,8 +37,6 @@ export class GooeyNavComponent implements AfterViewInit {
       e.preventDefault()
       // insert the event on google calendar
       this.httpService.bookRoom(this.roomId, e.target.id)
-      // fire a status event to update local view
-      this.httpService.statusEvent.emit({[this.roomId]: {color: 'red', statusChangeTime: moment().add(e.target.id, 'h')} })
     })
   }
 }

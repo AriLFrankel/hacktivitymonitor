@@ -13,10 +13,10 @@ import { AppComponent } from './components/app.component'
 import { GooeyNavComponent } from './components/gooey-nav.component'
 import { WeatherComponent } from './components/weather.component'
 import { ClockComponent } from './components/clock.component'
+import { CheckmarkComponent } from './components/checkmark.component';
 
 import { HttpService } from './shared/http.service'
 import { AuthService } from './shared/auth.service'
-import { CheckmarkComponent } from './components/checkmark.component'
 
 @NgModule({
   declarations: [

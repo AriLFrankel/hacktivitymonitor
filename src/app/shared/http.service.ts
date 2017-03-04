@@ -49,17 +49,25 @@ export class HttpService {
     .then( (events: any[] ) => {
       events.sort( (a, b) => moment(a.start).isBefore(b.start) ? 1 : -1)
       events.forEach((event) => {
-        console.log('event', event)
-        const start = moment(event.start.dateTime).toISOString()
-        const end = moment(event.end.dateTime).toISOString()
+        const start = moment(event.start.dateTime).toISOString(),
+        end = moment(event.end.dateTime).toISOString(),
+        eventDetails = {
+          id: event.id,
+          description: event.description || '',
+          summary: event.summary || '',
+          start: event.start,
+          end: event.end,
+          location: event.location
+        }
         if (start <= thirtyFromNow && start >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start), eventId: event.id} })
+          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start), eventDetails: eventDetails} })
         } else if (start <= currentTime && end >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end), eventId: event.id} })
+        // console.log('eventDetails object', eventDetails)
+          this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end), eventDetails: eventDetails} })
         } else if (start > thirtyFromNow) {
-          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start), eventId: event.id} })
+          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start), eventDetails: eventDetails} })
         } else {
-          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: 'tomorrow'} })
+          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: 'tomorrow',  eventDetails: eventDetails} })
         }
       })
       if (events.length === 0) {
@@ -126,8 +134,35 @@ export class HttpService {
       this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(event.end.dateTime)} })
     })
   }
-  //
-  freeRoom (roomId: string, eventId: string): void {
-    
+  // end a booking early by updating its end time on Google
+  // requires event editing permission
+
+  freeRoom (eventDetails: any): void {
+    const event = {
+      'summary': eventDetails.summary,
+      'location': eventDetails.location,
+      'description': eventDetails.description,
+      'start': {
+        'dateTime': eventDetails.start.dateTime,
+      },
+      'end': {
+        'dateTime': eventDetails.end.dateTime,
+      },
+      'reminders': {
+        'useDefault': false,
+        'overrides': [
+          {'method': 'email', 'minutes': 24 * 60},
+          {'method': 'popup', 'minutes': 10}
+        ]
+      }
+    };  
+    const request = gapi.client.calendar.events.update({
+      'calendarId': 'primary',
+      'eventId': eventDetails.id,
+      'resource': event
+    })
+    request.execute( (event) => {
+      console.log(event)
+    })
   }
 }

@@ -385,3 +385,21 @@ p {
     opacity: 1;
   }
 }
+/* line 1, ../scss/components/_endearly.scss */
+#endEarlyContainer {
+  text-align: center;
+  width: 100%;
+}
+
+/* line 6, ../scss/components/_endearly.scss */
+#endEarly {
+  margin: 40px auto;
+  background-color: #000;
+  color: #FFF;
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  line-height: 200px;
+  font-size: 35px;
+  cursor: pointer;
+}

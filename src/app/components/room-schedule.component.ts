@@ -25,7 +25,7 @@ export class RoomScheduleComponent implements OnDestroy {
   public statusChangeTimeUntil: any
   public statusChangeTimeBanner: string
   public titleColor: string
-  public upcomingEventId: string
+  public upcomingEventDetails: string
   // private socket: any
   // private io: any
 
@@ -47,7 +47,6 @@ export class RoomScheduleComponent implements OnDestroy {
     // listen for 'status' events
     this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
-      console.log('roomBusy', roomBusy)
       // update roomstatus
       this.roomStatus = roomBusy[this.roomId].color
       // update statusChangeTimeBanner to display when room is available / busy
@@ -56,31 +55,46 @@ export class RoomScheduleComponent implements OnDestroy {
       // update statusChangeTime to reflect how much time remains in hours until the room will be free
       this.statusChangeTimeUntil = roomBusy[this.roomId].statusChangeTime === 'tomorrow' ? 2
       : roomBusy[this.roomId].statusChangeTime.diff(moment()) / 3600000
-
-      this.upcomingEventId = roomBusy[this.roomId].eventId
+      
+      // change background color
       $('html').css('background', roomBusy[this.roomId].color)
+      
+      // update upcoming event details - needed for ending early
+      this.upcomingEventDetails = roomBusy[this.roomId].eventDetails
+      $('#endEarly').on('click', () => {
+          this.httpService.freeRoom(this.upcomingEventDetails)
+          $('#endEarly').css('display', 'none')
+          $('hd-checkmark').css('display', 'block')
+        })
       if (this.roomStatus === 'red') {
+        if($('hd-checkmark').css('display', 'none')){
+          // Make the end early button available
+          $('#endEarly').css('display', 'block')
+        }
         // rm gooey nav and checkmark from view
-        $('hd-gooey-nav').css({display: 'block', visibility: 'hidden'})
-        $('#\\.16, #\\.3, #\\.5, #\\.75, #1').css('visibility', 'hidden')
+        $('hd-gooey-nav, .bumper').css('display', 'none')
+        $('#\\.16, #\\.3, #\\.5, #\\.75, #1').css('display', 'none')
         $('hd-checkmark').css('display', 'none')
       } else {
+        $('hd-checkmark').css('display', 'none')
+        // hide the end early button
+        $('#endEarly').css('display', 'none')
         // put gooey nav and checkmark back in to view
-        if (this.roomStatus === 'green') {
-          $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, #1').css('visibility', 'visible')
+        if (this.roomStatus === 'green' && $('hd-checkmark').css('display') === 'none' ) {
+          $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, #1, .bumper').css('display', 'block')
         } else if (this.roomStatus === 'yellow') {
           $('#\\.75, #1, #\\.5').css('display', 'none')
-          console.log('available until', this.statusChangeTimeUntil)
           // change text colors to black
           // $('#AvailableBusy, #until, #statusChangeTime').css('color', 'black')
+          
           // conditionally show buttons for booking on how long room is available
           if (this.statusChangeTimeUntil < .3 ) {
               $('#\\.3').css('display', 'none')
             if ( this.statusChangeTimeUntil <= .17 ) {
-              $('hd-gooey-nav, #\\.3, #\\.16').css('visibility', 'hidden')
+              $('hd-gooey-nav, #\\.3, #\\.16, .bumper').css({'display': 'block', 'visibility': 'hidden'})
             }
           } else {
-            $('#\\.16, #\\.3').css('visibility', 'visible')
+            $('#\\.16, #\\.3').css('display', 'block')
           }
         }
       }
@@ -91,7 +105,7 @@ export class RoomScheduleComponent implements OnDestroy {
     // get the room's status, which will emit status events
     // set an interval to get room status every 3 seconds
     this.httpService.getStatus(this.roomId)
-    setInterval(() => {this.httpService.getStatus(this.roomId)}, 3000)
+    setInterval(() => {this.httpService.getStatus(this.roomId)}, 4000)
   }
 
   // avoid memory leaks by unsubscribing on destroy
