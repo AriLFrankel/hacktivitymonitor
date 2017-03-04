@@ -22,9 +22,10 @@ export class RoomScheduleComponent implements OnDestroy {
   private roomId: string
   public roomName: string
   public bannerColor: string
-  public statusChangeTimeUntil: number
+  public statusChangeTimeUntil: any
   public statusChangeTimeBanner: string
   public titleColor: string
+  public upcomingEventId: string
   // private socket: any
   // private io: any
 
@@ -46,16 +47,22 @@ export class RoomScheduleComponent implements OnDestroy {
     // listen for 'status' events
     this.statusSubscription = this.httpService.statusEvent
     .subscribe(roomBusy => {
+      console.log('roomBusy', roomBusy)
       // update roomstatus
       this.roomStatus = roomBusy[this.roomId].color
       // update statusChangeTimeBanner to display when room is available / busy
-      this.statusChangeTimeBanner = roomBusy[this.roomId].statusChangeTime.format('H:mm')
+      this.statusChangeTimeBanner = roomBusy[this.roomId].statusChangeTime === 'tomorrow' ? 'TOMORROW'
+      : roomBusy[this.roomId].statusChangeTime.format('H:mm')
       // update statusChangeTime to reflect how much time remains in hours until the room will be free
-      this.statusChangeTimeUntil = roomBusy[this.roomId].statusChangeTime.diff(moment()) / 3600000
+      this.statusChangeTimeUntil = roomBusy[this.roomId].statusChangeTime === 'tomorrow' ? 2
+      : roomBusy[this.roomId].statusChangeTime.diff(moment()) / 3600000
+
+      this.upcomingEventId = roomBusy[this.roomId].eventId
       $('html').css('background', roomBusy[this.roomId].color)
       if (this.roomStatus === 'red') {
         // rm gooey nav and checkmark from view
         $('hd-gooey-nav').css({display: 'block', visibility: 'hidden'})
+        $('#\\.16, #\\.3, #\\.5, #\\.75, #1').css('visibility', 'hidden')
         $('hd-checkmark').css('display', 'none')
       } else {
         // put gooey nav and checkmark back in to view
@@ -63,11 +70,13 @@ export class RoomScheduleComponent implements OnDestroy {
           $('hd-gooey-nav').css('visibility', 'visible')
           $('#\\.16, #\\.3, #\\.5, #\\.75, #1').css('visibility', 'visible')
         } else if (this.roomStatus === 'yellow') {
+          $('#\\.75, #1, #\\.5').css('display', 'none')
+          console.log('available until', this.statusChangeTimeUntil)
           // change text colors to black
           // $('#AvailableBusy, #until, #statusChangeTime').css('color', 'black')
           // conditionally show buttons for booking on how long room is available
           if (this.statusChangeTimeUntil < .3 ) {
-              $('#1, #\\.3, #\\.5, #\\.75').css('display', 'none')
+              $('#\\.3').css('display', 'none')
             if ( this.statusChangeTimeUntil < .16 ) {
               $('hd-gooey-nav').css('visibility', 'hidden')
             }

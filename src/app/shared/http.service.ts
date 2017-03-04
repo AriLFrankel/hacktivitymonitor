@@ -22,16 +22,11 @@ export class HttpService {
         'calendarId': room
       })
     }))
-    .then(roomsData =>
-      roomsData.map(room => room.result)
-    )
-    .then((roomsInfo) => {
-      return roomsInfo
-    })
+    .then(roomsData => roomsData.map(room => room.result) )
   }
 
   // get the events within a 24 hour period for a specific room
-  // return a promise that resolves with an array containing those events
+  // Return an array of event objects
   getEvents(room: string): any {
     const todayMin = new Date(new Date().toString().split(' ').slice(0, 4).concat(['00:01:00']).join(' ')).toISOString()
     const todayMax = new Date(new Date().toString().split(' ').slice(0, 4).concat(['23:59:59']).join(' ')).toISOString()
@@ -43,67 +38,54 @@ export class HttpService {
       'orderBy': 'startTime',
       'singleEvents': true
     })
-    .then(eventData => {
-      return eventData.result.items
-    })
+    .then( eventData => eventData.result.items )
   }
 
-  // query an individual calendar
+  // get and emit room status updates. Return nothing
   getStatus(roomId: string): void {
     const currentTime = moment().toISOString(),
     thirtyFromNow = moment().add(.5, 'h').toISOString()
-    gapi.client.calendar.freebusy.query({
-      'timeMin': moment().toISOString(),
-      'timeMax': moment().add(9, 'h').toISOString(),
-      'timeZone': 'America/Chicago',
-      'items': [
-        {
-          'id': roomId
-        }
-      ]
-    })
-    .execute( (response: any) => {
-      // loop through events and emit statuses
-      const events = response.result.calendars[roomId].busy
+    this.getEvents(roomId)
+    .then( (events: any[] ) => {
       events.sort( (a, b) => moment(a.start).isBefore(b.start) ? 1 : -1)
-      events
-      .forEach((busyObj) => {
-        const start = moment(busyObj.start).toISOString()
-        const end = moment(busyObj.end).toISOString()
+      events.forEach((event) => {
+        console.log('event', event)
+        const start = moment(event.start.dateTime).toISOString()
+        const end = moment(event.end.dateTime).toISOString()
         if (start <= thirtyFromNow && start >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start)} })
+          this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start), eventId: event.id} })
         } else if (start <= currentTime && end >= currentTime) {
-          this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end)} })
+          this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end), eventId: event.id} })
+        } else if (start > thirtyFromNow) {
+          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start), eventId: event.id} })
         } else {
-          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start)} })
+          this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: 'tomorrow'} })
         }
       })
-      if (response.result.calendars[roomId].busy.length === 0) {
+      if (events.length === 0) {
         this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: 'tomorrow'} })
       }
     })
   }
 
-  // return a promise resolvign with an array of events for a particular room
+  // get and format events for junior and senior schedules. Return a promise
   getSchedule(roomId: string): any {
     return this.getEvents(roomId)
     .then( (events: any[]) => {
-      return [].concat(events.map( (event: any) => {
-        const start: any = event.start.dateTime ? moment(event.start.dateTime).format('H:mm') : ''
-        const end: any = event.start.dateTime ? moment(event.end.dateTime).format('H:mm') : ''
-        const length: number = (end.toString().split(':')[0] - start.toString().split(':')[0]) * 60
-        + (end.toString().split(':')[1] - start.toString().split(':')[1])
-        const isHappening: boolean = this.isHappening(start.toString(), end.toString(), moment().format('H:mm').toString())
-        const isRelevant: boolean = isHappening ? true
-        : start === '' ? true
-        : this.isRelevant(start.toString(), end.toString(), moment().format('H:mm').toString())
-        const padding: string = isHappening ? '50px 20px'
-        : '10px 20px'
-        const opacity: string = isHappening ? '1' : '.75'
-        const display: string = isRelevant ? 'block' : 'none'
+      const currentTime = moment().toISOString(),
+      twoHoursFromNow = moment().add(2, 'h').toISOString()
+      return events.map( (event: any) => {
+        let start = event.start.dateTime ? moment(event.start.dateTime).toISOString() : '',
+        end = event.end.dateTime ? moment(event.end.dateTime).toISOString() : ''
+        const isHappening: boolean = start <= currentTime && end >= currentTime,
+        isRelevant: boolean = isHappening || start === '' || start < twoHoursFromNow && end >= currentTime ? true : false,
+        padding: string = isHappening ? '50px 20px' : '10px 20px',
+        opacity: string = isHappening ? '1' : '.75',
+        display: string = isRelevant ? 'block' : 'none'
+        start = start === '' ? '' : moment(start).format('H:mm')
+        end = end === '' ? '' : moment(end).format('H:mm')
         return Object.assign(event, {start: start, end: end, display: display, opacity: opacity, padding: padding})
-        })
-      ).filter( event => event.display === 'block')
+      }).filter( event => event.display === 'block')
       .slice(0, 5)
     })
   }
@@ -144,7 +126,10 @@ export class HttpService {
     })
   }
 
+
+
   /*helpers*/
+  // TODO: REFACTOR TO REMOVE THESE HELPER FUNCTIONS AND FOLLOW GETSTATUS PATTERNS
 
   // is an event happening right now?
   isHappening(start, end, currTime): boolean {
