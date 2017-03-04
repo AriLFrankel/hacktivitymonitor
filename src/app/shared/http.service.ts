@@ -91,6 +91,7 @@ export class HttpService {
   }
 
   /* post */
+  // create a 'last minute' booking
   bookRoom (roomId: string, length: number): void {
     const event: any = {
       'summary': 'Last Minute Booking',
@@ -125,28 +126,8 @@ export class HttpService {
       this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(event.end.dateTime)} })
     })
   }
-
-
-
-  /*helpers*/
-  // TODO: REFACTOR TO REMOVE THESE HELPER FUNCTIONS AND FOLLOW GETSTATUS PATTERNS
-
-  // is an event happening right now?
-  isHappening(start, end, currTime): boolean {
-    const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
-    endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
-    currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1])
-    return (startHour < currHour || startHour === currHour && startMinute < currMinute + 2) &&
-    (endHour > currHour || endHour === currHour && endMinute > currMinute)
+  //
+  freeRoom (roomId: string, eventId: string): void {
+    
   }
-
-  // is an event happening within two hours from now
-  isRelevant(start, end, currTime): boolean {
-    const startHour = Number(start.split(':')[0]), startMinute = Number(start.split(':')[1]),
-    endHour = Number(end.split(':')[0]), endMinute = Number(end.split(':')[1]),
-    currHour = Number(currTime.split(':')[0]), currMinute = Number(currTime.split(':')[1]),
-    twoFromNowHour = Number(currTime.split(':')[0]) + 2
-    return startHour >= currHour || startHour === currHour && startMinute >= currMinute - 5
-  }
-
 }

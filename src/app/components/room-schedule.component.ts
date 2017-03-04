@@ -67,8 +67,7 @@ export class RoomScheduleComponent implements OnDestroy {
       } else {
         // put gooey nav and checkmark back in to view
         if (this.roomStatus === 'green') {
-          $('hd-gooey-nav').css('visibility', 'visible')
-          $('#\\.16, #\\.3, #\\.5, #\\.75, #1').css('visibility', 'visible')
+          $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, #1').css('visibility', 'visible')
         } else if (this.roomStatus === 'yellow') {
           $('#\\.75, #1, #\\.5').css('display', 'none')
           console.log('available until', this.statusChangeTimeUntil)
@@ -77,8 +76,8 @@ export class RoomScheduleComponent implements OnDestroy {
           // conditionally show buttons for booking on how long room is available
           if (this.statusChangeTimeUntil < .3 ) {
               $('#\\.3').css('display', 'none')
-            if ( this.statusChangeTimeUntil < .16 ) {
-              $('hd-gooey-nav').css('visibility', 'hidden')
+            if ( this.statusChangeTimeUntil <= .17 ) {
+              $('hd-gooey-nav, #\\.3, #\\.16').css('visibility', 'hidden')
             }
           } else {
             $('#\\.16, #\\.3').css('visibility', 'visible')
