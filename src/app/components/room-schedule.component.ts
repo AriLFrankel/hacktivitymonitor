@@ -81,7 +81,12 @@ export class RoomScheduleComponent implements OnDestroy {
         $('#endEarly').css('display', 'none')
         // put gooey nav and checkmark back in to view
         if (this.roomStatus === 'green' && $('hd-checkmark').css('display') === 'none' ) {
-          $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, #1, .bumper').css('display', 'block')
+          if(this.statusChangeTimeUntil <= 1){
+            $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, .bumper').css('display', 'block')
+            $('#1').css('display', 'none')
+          } else {
+            $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, #1, .bumper').css('display', 'block')
+          }
         } else if (this.roomStatus === 'yellow') {
           $('#\\.75, #1, #\\.5').css('display', 'none')
           // change text colors to black

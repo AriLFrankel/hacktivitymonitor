@@ -47,7 +47,7 @@ export class HttpService {
     thirtyFromNow = moment().add(.5, 'h').toISOString()
     this.getEvents(roomId)
     .then( (events: any[] ) => {
-      events.sort( (a, b) => moment(a.start).isBefore(b.start) ? 1 : -1)
+      events.sort( (a, b) => moment(a.start.dateTime).isBefore(b.start.dateTime) ? 1 : -1)
       events.forEach((event) => {
         const start = moment(event.start.dateTime).toISOString(),
         end = moment(event.end.dateTime).toISOString(),
@@ -162,7 +162,7 @@ export class HttpService {
       'resource': event
     })
     request.execute( (event) => {
-      console.log(event)
+      // console.log(event)
     })
   }
 }
