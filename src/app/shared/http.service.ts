@@ -47,8 +47,12 @@ export class HttpService {
     thirtyFromNow = moment().add(.5, 'h').toISOString()
     this.getEvents(roomId)
     .then( (events: any[] ) => {
-      events.sort( (a, b) => moment(a.start.dateTime).isBefore(b.start.dateTime) ? 1 : -1)
-      events.forEach((event) => {
+      const filteredEvents = events.filter( event => moment(event.end.dateTime).toISOString() >= moment().toISOString())
+      console.log('events before sort and filter', moment().format('H:mm'), filteredEvents.map( event => [moment(event.start.dateTime).format('H:mm'), moment(event.end.dateTime).format('H:mm')]))
+      filteredEvents.reverse()
+      // .filter( event => moment().isBefore(moment(event.end.dateTime)) )
+      // console.log('events after sort and filter', events.map( event => [event.start.dateTime, event.end.dateTime]))
+      filteredEvents.forEach((event) => {
         const start = moment(event.start.dateTime).toISOString(),
         end = moment(event.end.dateTime).toISOString(),
         eventDetails = {
@@ -70,7 +74,7 @@ export class HttpService {
           this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: 'tomorrow',  eventDetails: eventDetails} })
         }
       })
-      if (events.length === 0) {
+      if (filteredEvents.length === 0) {
         this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: 'tomorrow'} })
       }
     })

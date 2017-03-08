@@ -88,18 +88,19 @@ export class RoomScheduleComponent implements OnDestroy {
             $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, #1, .bumper').css('display', 'block')
           }
         } else if (this.roomStatus === 'yellow') {
+          $('hd-gooey-nav, .bumper, #\\.16, #\\.3').css('display', 'block')
           $('#\\.75, #1, #\\.5').css('display', 'none')
           // change text colors to black
           // $('#AvailableBusy, #until, #statusChangeTime').css('color', 'black')
           
           // conditionally show buttons for booking on how long room is available
-          if (this.statusChangeTimeUntil < .3 ) {
+          if (this.statusChangeTimeUntil <= .3 ) {
               $('#\\.3').css('display', 'none')
             if ( this.statusChangeTimeUntil <= .17 ) {
-              $('hd-gooey-nav, #\\.3, #\\.16, .bumper').css({'display': 'block', 'visibility': 'hidden'})
+              $('hd-gooey-nav, #\\.3, #\\.16, .bumper').css('visibility', 'hidden')
             }
           } else {
-            $('#\\.16, #\\.3').css('display', 'block')
+            // $('hd-gooey-nav, .bumper, #\\.16, #\\.3').css('display', 'block')
           }
         }
       }
@@ -110,7 +111,7 @@ export class RoomScheduleComponent implements OnDestroy {
     // get the room's status, which will emit status events
     // set an interval to get room status every 3 seconds
     this.httpService.getStatus(this.roomId)
-    setInterval(() => {this.httpService.getStatus(this.roomId)}, 4000)
+    setInterval(() => {this.httpService.getStatus(this.roomId)}, 6000)
   }
 
   // avoid memory leaks by unsubscribing on destroy
