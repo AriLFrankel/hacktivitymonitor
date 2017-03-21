@@ -48,10 +48,7 @@ export class HttpService {
     this.getEvents(roomId)
     .then( (events: any[] ) => {
       const filteredEvents = events.filter( event => moment(event.end.dateTime).toISOString() >= moment().toISOString())
-      console.log('events before sort and filter', moment().format('H:mm'), filteredEvents.map( event => [moment(event.start.dateTime).format('H:mm'), moment(event.end.dateTime).format('H:mm')]))
       filteredEvents.reverse()
-      // .filter( event => moment().isBefore(moment(event.end.dateTime)) )
-      // console.log('events after sort and filter', events.map( event => [event.start.dateTime, event.end.dateTime]))
       filteredEvents.forEach((event) => {
         const start = moment(event.start.dateTime).toISOString(),
         end = moment(event.end.dateTime).toISOString(),
@@ -66,7 +63,6 @@ export class HttpService {
         if (start <= thirtyFromNow && start >= currentTime) {
           this.statusEvent.emit({[roomId]: {color: 'yellow', statusChangeTime: moment(start), eventDetails: eventDetails} })
         } else if (start <= currentTime && end >= currentTime) {
-        // console.log('eventDetails object', eventDetails)
           this.statusEvent.emit({[roomId]: {color: 'red', statusChangeTime: moment(end), eventDetails: eventDetails} })
         } else if (start > thirtyFromNow) {
           this.statusEvent.emit({[roomId]: {color: 'green', statusChangeTime: moment(start), eventDetails: eventDetails} })
@@ -159,13 +155,13 @@ export class HttpService {
           {'method': 'popup', 'minutes': 10}
         ]
       }
-    };  
+    }
     const request = gapi.client.calendar.events.update({
       'calendarId': 'primary',
       'eventId': eventDetails.id,
       'resource': event
     })
-    request.execute( (event) => {
+    request.execute( (executedEvent) => {
       // console.log(event)
     })
   }

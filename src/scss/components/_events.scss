@@ -12,5 +12,14 @@
     background: #00B398;
   }
   font-size: 35px;
+  a,
+  a:hover,
+  a:active,
+  a:visited,
+  a:link {
+    color: black;
+    cursor: pointer;
+    text-decoration: none
+  }
 }
 

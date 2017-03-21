@@ -23,7 +23,7 @@ export class JuniorSeniorComponent {
     setInterval(getSchedule, 60000)
   }
 
-  getSchedule(): void {
+  getSchedule() {
     // get this room's schedule, which will fire status events
     this.httpService.getSchedule(roomDictionary[this.juniorsenior])
     .then( (eventsArr) => {

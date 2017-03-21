@@ -55,10 +55,10 @@ export class RoomScheduleComponent implements OnDestroy {
       // update statusChangeTime to reflect how much time remains in hours until the room will be free
       this.statusChangeTimeUntil = roomBusy[this.roomId].statusChangeTime === 'tomorrow' ? 2
       : roomBusy[this.roomId].statusChangeTime.diff(moment()) / 3600000
-      
+
       // change background color
       $('html').css('background', roomBusy[this.roomId].color)
-      
+
       // update upcoming event details - needed for ending early
       this.upcomingEventDetails = roomBusy[this.roomId].eventDetails
       $('#endEarly').on('click', () => {
@@ -67,7 +67,7 @@ export class RoomScheduleComponent implements OnDestroy {
           $('hd-checkmark').css('display', 'block')
         })
       if (this.roomStatus === 'red') {
-        if($('hd-checkmark').css('display', 'none')){
+        if ($('hd-checkmark').css('display', 'none')) {
           // Make the end early button available
           $('#endEarly').css('display', 'block')
         }
@@ -81,7 +81,7 @@ export class RoomScheduleComponent implements OnDestroy {
         $('#endEarly').css('display', 'none')
         // put gooey nav and checkmark back in to view
         if (this.roomStatus === 'green' && $('hd-checkmark').css('display') === 'none' ) {
-          if(this.statusChangeTimeUntil <= 1){
+          if (this.statusChangeTimeUntil <= 1) {
             $('hd-gooey-nav, #\\.16, #\\.3, #\\.5, #\\.75, .bumper').css('display', 'block')
             $('#1').css('display', 'none')
           } else {
@@ -92,7 +92,7 @@ export class RoomScheduleComponent implements OnDestroy {
           $('#\\.75, #1, #\\.5').css('display', 'none')
           // change text colors to black
           // $('#AvailableBusy, #until, #statusChangeTime').css('color', 'black')
-          
+
           // conditionally show buttons for booking on how long room is available
           if (this.statusChangeTimeUntil <= .3 ) {
               $('#\\.3').css('display', 'none')

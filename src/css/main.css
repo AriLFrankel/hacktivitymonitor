@@ -14,6 +14,16 @@
 .event.Senior {
   background: #00B398;
 }
+/* line 15, ../scss/components/_events.scss */
+.event a,
+.event a:hover,
+.event a:active,
+.event a:visited,
+.event a:link {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
 
 /* line 1, ../scss/components/_clock.scss */
 #time-main {
@@ -50,15 +60,25 @@
   margin: 0;
 }
 
+/* line 29, ../scss/components/_clock.scss */
+#time-junior-senior {
+  color: #0090DA;
+  text-align: center;
+  margin: 0;
+}
+/* line 33, ../scss/components/_clock.scss */
+#time-junior-senior #clock {
+  font-size: 250px;
+}
+/* line 36, ../scss/components/_clock.scss */
+#time-junior-senior #minutes {
+  color: #00B398;
+}
+
 /* line 1, ../scss/components/_containers.scss */
 .col-md-4 {
   padding: 0;
   background: black;
-}
-
-/* line 6, ../scss/components/_containers.scss */
-.schedule {
-  height: 100vh;
 }
 
 /* line 1, ../scss/components/_rooms.scss */
