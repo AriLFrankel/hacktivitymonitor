@@ -152,6 +152,11 @@ html body {
   width: auto;
 }
 
+/* line 17, ../scss/components/_weather.scss */
+#junior-senior-display .info {
+  font-size: 100px;
+}
+
 /* line 1, ../scss/components/_logo.scss */
 #logo {
   width: 80%;
