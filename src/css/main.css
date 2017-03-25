@@ -25,6 +25,11 @@
   text-decoration: none;
 }
 
+/* line 27, ../scss/components/_events.scss */
+#junior-senior-display a {
+  font-size: 120px;
+}
+
 /* line 1, ../scss/components/_clock.scss */
 #time-main {
   color: #0090DA;
@@ -68,9 +73,10 @@
 }
 /* line 33, ../scss/components/_clock.scss */
 #time-junior-senior #clock {
-  font-size: 250px;
+  font-size: 220px;
+  padding-top: 10px;
 }
-/* line 36, ../scss/components/_clock.scss */
+/* line 37, ../scss/components/_clock.scss */
 #time-junior-senior #minutes {
   color: #00B398;
 }

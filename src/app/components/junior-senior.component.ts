@@ -13,7 +13,8 @@ declare const moment: any
 export class JuniorSeniorComponent {
   events: any[] = []
   @Input() juniorsenior: string
-
+  @Input() vertical: boolean
+  
   constructor(private httpService: HttpService, private ref: ChangeDetectorRef) {
     ref.detach()
     const getSchedule = this.getSchedule.bind(this)
@@ -27,7 +28,11 @@ export class JuniorSeniorComponent {
     // get this room's schedule, which will fire status events
     this.httpService.getSchedule(roomDictionary[this.juniorsenior])
     .then( (eventsArr) => {
-      this.events = eventsArr
+      // update padding to adjust for vertical / horizontal display
+      this.events = this.vertical ? eventsArr.map( event => 
+        Object.assign(event, 
+          {padding: event.padding === "10px 20px" ? "80px 20px" : "200px 20px"} )) : eventsArr
+
       // trigger a rerender
       this.ref.detectChanges()
     })
